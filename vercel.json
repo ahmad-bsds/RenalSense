@@ -1,3 +1,18 @@
+{
+	"builds":[
+		{
+			"src":"application/apis.py",
+			"use":"@vercel/python"
+		}
+	],
+	"routes":[
+		{
+			"src":"/(.*)",
+			"dest":"apis.py"
+		}
+
+	]
+}
 # api/api2.py
 from fastapi import Depends
 from utils import create_api, get_api_key
