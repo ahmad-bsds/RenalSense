@@ -50,7 +50,6 @@ async def get_inference(id: int, api_key: APIKey = Depends(get_api_key)):
         raise HTTPException(status_code=404, detail="Inference not found")
     return {"id": id, "inference": inference_storage[id]}
 
-
 if __name__ == "__main__":
     import uvicorn
     # uvicorn.run(app, host="0.0.0.0", port=8000)
