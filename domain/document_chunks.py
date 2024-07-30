@@ -1,6 +1,5 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-
 example_text = """
 To the uninitiated, a data analysis may appear to follow a
 linear, one-step-after-the-other process which at the end,
@@ -24,10 +23,11 @@ non-linear work of developing and refining a data analysis
 so that it can be “algorithmized.”
 """
 
-def chunk_text(text: str):
+
+def chunk_text(text: str = example_text):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size = 15,
-        chunk_overlap= 5
+        chunk_size=15,
+        chunk_overlap=5
     )
     text = text_splitter.split_text(text)
     return text
