@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="embeddings added, enhanced other things.">
+    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated embedings and query with fastembed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/apis.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/apis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/data_embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/data_embed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/document_chunks.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/document_chunks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/user_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/user_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/vector_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/vector_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/interface/bot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +236,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722408398403</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="updated embedings and query with fastembed">
+      <option name="closed" value="true" />
+      <created>1722445706561</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1722445706561</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -257,6 +267,7 @@
     <MESSAGE value="Changed the data types of id in apis.py" />
     <MESSAGE value="embeddings added" />
     <MESSAGE value="embeddings added, enhanced other things." />
-    <option name="LAST_COMMIT_MESSAGE" value="embeddings added, enhanced other things." />
+    <MESSAGE value="updated embedings and query with fastembed" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated embedings and query with fastembed" />
   </component>
 </project>

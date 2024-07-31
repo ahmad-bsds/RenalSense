@@ -14,35 +14,42 @@ api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
 data_storage: Dict[str, str] = {}
 prompt_storage: Dict[str, str] = {}
 inference_storage: Dict[str, str] = {
-    '0':"Your kidney is healthy."
+    '0': "Your kidney is healthy."
 }
 
-async def get_api_key(api_key_header: str = Security(api_key_header)):
-    if api_key_header == API_KEY:
-        return api_key_header
+
+async def get_api_key(api_key_headers: str = Security(api_key_header)):
+    if api_key_headers == API_KEY:
+        return api_key_headers
     raise HTTPException(status_code=403, detail="Could not validate credentials")
+
 
 class DataItem(BaseModel):
     id: str
     data: str
 
+
 class PromptItem(BaseModel):
     id: str
     prompt: str
 
+
 class InferenceItem(BaseModel):
     id: str
     inference: str
+
 
 @app.post("/data")
 async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
     data_storage[item.id] = item.data
     return {"message": "Data stored successfully"}
 
+
 @app.post("/prompt")
 async def store_prompt(item: PromptItem, api_key: APIKey = Depends(get_api_key)):
     prompt_storage[item.id] = item.prompt
     return {"message": "Prompt stored successfully"}
+
 
 @app.get("/inference/{id}")
 async def get_inference(id: str, api_key: APIKey = Depends(get_api_key)):
@@ -50,11 +57,8 @@ async def get_inference(id: str, api_key: APIKey = Depends(get_api_key)):
         raise HTTPException(status_code=404, detail="Inference not found")
     return {"id": id, "inference": inference_storage[id]}
 
+
 if __name__ == "__main__":
     import uvicorn
-    # uvicorn.run(app, host="0.0.0.0", port=8000)
     uvicorn.run(app)
 
-# if __name__ == "__main__":
-#     from gunicorn.app.wsgiapp import run
-#     run()

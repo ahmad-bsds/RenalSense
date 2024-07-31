@@ -19,7 +19,7 @@ def add_data_or_usr(user_id: str, data):
     add_collection_data(user_id=user_id, ids=ids, docs=chunks)
 
 
-def produce_prompt_inference(user_id: str, prompt: str):
+def produce_prompt_inference(user_id: str, prompt: str, data):
     """
     When user will enter simple prompt it will answer to that.
     """

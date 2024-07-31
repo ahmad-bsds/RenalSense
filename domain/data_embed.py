@@ -7,5 +7,5 @@ model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 
 def data_encode(text):
-    embeddings = model.encode(sentences)
+    embeddings = model.encode(text)
     return embeddings
