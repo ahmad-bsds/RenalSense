@@ -28,7 +28,7 @@ Recommendations:
 [Follow-up recommendations based on findings, e.g., repeat ultrasound in 6 months, refer to nephrologist for further evaluation, monitor blood pressure, etc.]
 """
 
-USER_ID = "006"
+USER_ID = "008"
 
 print("Adding new user...................")
 add_new_user_in_app(user_id=USER_ID, data=data) # Getting an error.
