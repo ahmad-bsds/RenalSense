@@ -2,12 +2,12 @@
 from dotenv import load_dotenv
 from qdrant_client import QdrantClient, models
 import os
+
 # Load the environment variables from the .env file at the specified path
 load_dotenv(dotenv_path='../.env')
 
 # Access the API key
 qd_api_key = os.getenv('QDRANT_API_KEY')
-
 
 # Initiating qdrant client.
 qdrant_client = QdrantClient(
@@ -35,6 +35,7 @@ def add_collection_data(user_id: str, ids, vectors):
         )
     )
 
+
 def delete_collection(user_id: str):
     """Function to delete the collection in case user delete his/her account"""
     qdrant_client.delete_collection(collection_name=f"{user_id}")
@@ -43,3 +44,10 @@ def delete_collection(user_id: str):
 def query_collection(user_id: str, query: str):
     """Function to query the collection by user id for relative collection and the query test."""
     qdrant_client.query(collection_name=user_id, query_text=query, limit=3)
+
+
+def search(vect, c_name):
+    return qdrant_client.search(
+        collection_name=c_name,
+        query_vector=vect
+    )
