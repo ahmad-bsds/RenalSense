@@ -1,48 +1,29 @@
-from infrastructure.vector_db import create_collection, add_collection_data, query_collection
+from infrastructure.vector_db import add_collection_data, query_collection
 from domain.data_embed import data_encode
 from domain.document_chunks import chunk_text
 
 
-def add_new_user_in_app(user_id: str, data):
+def add_data_or_usr(user_id: str, data):
     """
-    This function will add the user in the vector database against his/her user id.
+    This function will add the user if not available in the vector database against his/her user id.
     """
     # Adding user in vector db.
-    create_collection(user_id=user_id)
+    # create_collection(user_id=user_id)
 
     # Chunking the data.
     chunks = chunk_text(data)
 
-    # Encoding data into vectors.
-    encoded_data = data_encode(chunks)
-
-    idx = list(range(len(encoded_data)))
+    ids = list(range(len(chunks)))
 
     # Storing data into qdrant.
-    add_collection_data(user_id=user_id, ids=idx, vectors=encoded_data.tolist())
-
-
-def add_user_data(user_id: str, data):
-    """
-    This function will add the user data in the vector database against his/her user id.
-    """
-    # Chunking the data.
-    chunks = chunk_text(data)
-
-    # Encoding data into vectors.
-    encoded_data = data_encode(chunks)
-
-    # Storing data into qdrant.
-    for ids, vec in enumerate(encoded_data):
-        # Adding his/her encoded data in vector DB.
-        add_collection_data(user_id=user_id, ids=ids, vectors=vec)
+    add_collection_data(user_id=user_id, ids=ids, docs=chunks)
 
 
 def produce_prompt_inference(user_id: str, prompt: str):
     """
     When user will enter simple prompt it will answer to that.
     """
-    return query_collection(user_id=user_id, query=prompt)
+    return query_collection(user_id=user_id, prompt=prompt)
 
 
 def produce_image_inference():
@@ -59,3 +40,4 @@ def produce_image_inference():
 
 def update_user_recommendations(user_id: str):
     pass
+# -------------------------

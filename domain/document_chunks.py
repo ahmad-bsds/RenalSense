@@ -26,11 +26,12 @@ so that it can be “algorithmized.”
 
 def chunk_text(text: str = example_text):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=15,
+        chunk_size=9,
         chunk_overlap=5
     )
     text = text_splitter.split_text(text)
     return text
+
 
 # text = chunk_text(example_text)
 # print(text)

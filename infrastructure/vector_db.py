@@ -16,23 +16,13 @@ qdrant_client = QdrantClient(
 )
 
 
-def create_collection(user_id: str):
-    """Function to create a collection against a user by user id."""
-    return qdrant_client.create_collection(
-        collection_name=f"{user_id}",
-        vectors_config=models.VectorParams(size=384, distance=models.Distance.COSINE),
-    )
-
-
-# TODO: how to vector set size.
-def add_collection_data(user_id: str, ids, vectors):
+def add_collection_data(user_id: str, docs, ids):
     """Collection to add new data into the collection by user id against related collection."""
-    qdrant_client.upsert(
+    qdrant_client.add(
         collection_name=user_id,
-        points=models.Batch(
-            ids=ids,
-            vectors=vectors
-        )
+        documents=docs,
+        # metadata=metadata,
+        ids=ids
     )
 
 
@@ -41,13 +31,10 @@ def delete_collection(user_id: str):
     qdrant_client.delete_collection(collection_name=f"{user_id}")
 
 
-def query_collection(user_id: str, query: str):
-    """Function to query the collection by user id for relative collection and the query test."""
-    qdrant_client.query(collection_name=user_id, query_text=query, limit=3)
-
-
-def search(vect, c_name):
-    return qdrant_client.search(
-        collection_name=c_name,
-        query_vector=vect
+def query_collection(user_id, prompt):
+    return qdrant_client.query(
+        collection_name=user_id,
+        query_text=prompt
     )
+
+# ------------
