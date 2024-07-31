@@ -6,6 +6,6 @@ sentences = chunk_text()
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 
-def encode(text):
+def data_encode(text):
     embeddings = model.encode(sentences)
     return embeddings

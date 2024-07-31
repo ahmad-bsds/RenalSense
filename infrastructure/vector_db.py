@@ -42,4 +42,4 @@ def delete_collection(user_id: str):
 
 def query_collection(user_id: str, query: str):
     """Function to query the collection by user id for relative collection and the query test."""
-    qdrant_client.query(collection_name=user_id, query_text=query)
+    qdrant_client.query(collection_name=user_id, query_text=query, limit=3)

@@ -28,14 +28,14 @@ Recommendations:
 [Follow-up recommendations based on findings, e.g., repeat ultrasound in 6 months, refer to nephrologist for further evaluation, monitor blood pressure, etc.]
 """
 
-USER_ID = "008"
+USER_ID = "013"
 
 print("Adding new user...................")
-add_new_user_in_app(user_id=USER_ID, data=data) # Getting an error.
+add_new_user_in_app(user_id=USER_ID, data=data)  # Getting an error.
 print("New user added....................")
 
-print("Quring data..................")
-query = produce_prompt_inference(user_id=USER_ID,
-                                 prompt="What is the patient's estimated glomerular filtration rate (eGFR) and what "
-                                        "does this indicate about kidney function?")
-print(query)
+# print("Quring data..................")
+# query = produce_prompt_inference(user_id=USER_ID,
+#                                  prompt="What is the patient's estimated glomerular filtration rate (eGFR) and what "
+#                                         "does this indicate about kidney function?")
+# print(query)
