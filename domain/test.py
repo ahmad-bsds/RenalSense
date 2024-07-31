@@ -31,7 +31,7 @@ Recommendations:
 USER_ID = "013"
 
 print("Adding new user...................")
-add_new_user_in_app(user_id=USER_ID, data=data)  # Getting an error.
+add_new_user_in_app(user_id=USER_ID, data=data)
 print("New user added....................")
 
 # print("Quring data..................")
