@@ -1,4 +1,4 @@
-from ..infrastructure.vector_db import create_collection, add_collection_data, query_collection
+from infrastructure.vector_db import create_collection, add_collection_data, query_collection
 from domain.data_embed import encode
 from domain.document_chunks import chunk_text
 
@@ -16,10 +16,10 @@ def add_new_user_in_app(user_id: str, data):
     # Encoding data into vectors.
     encoded_data = encode(chunks)
 
+    idx = list(range(len(encoded_data)))
+
     # Storing data into qdrant.
-    for ids, vec in enumerate(encoded_data):
-        # Adding his/her encoded data in vector DB.
-        add_collection_data(user_id=user_id, ids=ids, vectors=vec)
+    add_collection_data(user_id=user_id, ids=idx, vectors=encoded_data.tolist())
 
 
 def add_user_data(user_id: str, data):

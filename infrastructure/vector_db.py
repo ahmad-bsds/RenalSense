@@ -1,10 +1,18 @@
 # import fastembed
+from dotenv import load_dotenv
 from qdrant_client import QdrantClient, models
+import os
+# Load the environment variables from the .env file at the specified path
+load_dotenv(dotenv_path='../.env')
+
+# Access the API key
+qd_api_key = os.getenv('QDRANT_API_KEY')
+
 
 # Initiating qdrant client.
 qdrant_client = QdrantClient(
-    url="https://cd5dba88-8077-4aa3-9e35-78fd82a4a850.us-east4-0.gcp.cloud.qdrant.io:6333",
-    api_key="9Yt6Xfds2O-84IT8LwFVl3i0Ly8DRFZD7AGr1SrhABJDBF-VqaHZ3g",
+    url="https://09242a5b-7cf2-4398-9e78-88478b9f1f4f.us-east4-0.gcp.cloud.qdrant.io:6333",
+    api_key=qd_api_key,
 )
 
 
@@ -12,7 +20,7 @@ def create_collection(user_id: str):
     """Function to create a collection against a user by user id."""
     return qdrant_client.create_collection(
         collection_name=f"{user_id}",
-        vectors_config=models.VectorParams(size=100, distance=models.Distance.COSINE),
+        vectors_config=models.VectorParams(size=384, distance=models.Distance.COSINE),
     )
 
 
