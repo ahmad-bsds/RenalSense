@@ -40,19 +40,19 @@ class InferenceItem(BaseModel):
     prompt: str
 
 
-@app.post("/data")
+@app.post("/data/{item}")
 async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
     add_data_or_usr(user_id=item.id, data=item.data)
     print("Data sent successful!")
 
 
-@app.post("/prompt")
+@app.post("/prompt/{item}")
 async def store_prompt(item: PromptItem, api_key: APIKey = Depends(get_api_key)):
     prompt_storage[item.id] = item.prompt
     return {"message": "Prompt stored successfully"}
 
 
-@app.get("/inference/{id}")
+@app.get("/inference/{item}")
 async def get_inference(item: InferenceItem, api_key: APIKey = Depends(get_api_key)):
     return produce_prompt_inference(user_id=item.id, prompt=item.prompt)
 
