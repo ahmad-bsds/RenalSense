@@ -37,7 +37,7 @@ class PromptItem(BaseModel):
 
 class InferenceItem(BaseModel):
     id: str
-    inference: str
+    prompt: str
 
 
 @app.post("/data")
@@ -56,7 +56,7 @@ async def store_prompt(item: PromptItem, api_key: APIKey = Depends(get_api_key))
 async def get_inference(item: InferenceItem, api_key: APIKey = Depends(get_api_key)):
     if item not in inference_storage:
         raise HTTPException(status_code=404, detail="Inference not found")
-    return produce_prompt_inference(user_id=item.id, prompt=item.id)
+    return produce_prompt_inference(user_id=item.id, prompt=item.prompt)
 
 
 if __name__ == "__main__":
