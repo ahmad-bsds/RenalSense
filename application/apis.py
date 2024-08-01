@@ -54,8 +54,6 @@ async def store_prompt(item: PromptItem, api_key: APIKey = Depends(get_api_key))
 
 @app.get("/inference/{id}")
 async def get_inference(item: InferenceItem, api_key: APIKey = Depends(get_api_key)):
-    if item not in inference_storage:
-        raise HTTPException(status_code=404, detail="Inference not found")
     return produce_prompt_inference(user_id=item.id, prompt=item.prompt)
 
 
