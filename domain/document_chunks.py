@@ -27,7 +27,7 @@ so that it can be “algorithmized.”
 def chunk_text(text: str = example_text):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=100,
-        chunk_overlap=20
+        chunk_overlap=10
     )
     text = text_splitter.split_text(text)
     return text

@@ -16,12 +16,12 @@ qdrant_client = QdrantClient(
 )
 
 
-def add_collection_data(user_id: str, docs, ids):
+def add_collection_data(user_id: str, docs, ids, metadata=None):
     """Collection to add new data into the collection by user id against related collection."""
     qdrant_client.add(
         collection_name=user_id,
         documents=docs,
-        # metadata=metadata,
+        metadata=metadata,
         ids=ids
     )
 
@@ -34,7 +34,8 @@ def delete_collection(user_id: str):
 def query_collection(user_id, prompt):
     return qdrant_client.query(
         collection_name=user_id,
-        query_text=prompt
+        query_text=prompt,
+        limit=10
     )
 
 # ------------

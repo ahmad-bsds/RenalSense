@@ -1,7 +1,4 @@
-from domain.user_functions import add_data_or_usr, produce_prompt_inference
-from domain.prompt_embed import prompt_encode
-from infrastructure.vector_db import qdrant_client
-from infrastructure.vector_db import query_collection
+from user_functions import produce_prompt_inference
 
 data = """
 Patient Information:
@@ -37,20 +34,16 @@ Assessment:
 Overall, patient appears in good health for his age. He is overweight and requires lifestyle modifications to improve cardiovascular health. Lipid profile is abnormal and requires further evaluation and management.
 
 Plan:
-
 Recommend diet and exercise to achieve and maintain a healthy weight.
 Refer to a cardiologist for further evaluation of lipid profile and to discuss treatment options.
 Schedule follow-up appointment in 3 months to monitor progress.
-Note: This is a hypothetical medical report and does not constitute actual medical advice. Please consult with a healthcare professional for any medical concerns.
-
-Would you like to add any specific conditions or symptoms to the report?
+Blood: normal
+suger: normal
+sleep:normal
 """
-prompt = "technology"
-USER_ID = "040"
+prompt = "what will you suggest based on my data?"
+USER_ID = "0011"
 
-# print("....................Start")
-# add_data_or_usr(user_id=USER_ID, data=data)
-print("................................Done 1/2")
-srh_r = query_collection(user_id=USER_ID, prompt=prompt)
-
-print(srh_r[0].metadata['document'])
+print(
+    produce_prompt_inference(user_id=USER_ID, prompt=prompt)
+)
