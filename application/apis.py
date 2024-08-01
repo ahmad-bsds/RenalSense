@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, Security
 from fastapi.security.api_key import APIKeyHeader, APIKey
 from pydantic import BaseModel
 from typing import Dict
+from domain.user_functions import add_data_or_usr, produce_prompt_inference
 
 app = FastAPI()
 
@@ -41,8 +42,7 @@ class InferenceItem(BaseModel):
 
 @app.post("/data")
 async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
-    data_storage[item.id] = item.data
-    return {"message": "Data stored successfully"}
+    add_data_or_usr(user_id=item.id, data=item.data)
 
 
 @app.post("/prompt")
@@ -52,10 +52,10 @@ async def store_prompt(item: PromptItem, api_key: APIKey = Depends(get_api_key))
 
 
 @app.get("/inference/{id}")
-async def get_inference(id: str, api_key: APIKey = Depends(get_api_key)):
-    if id not in inference_storage:
+async def get_inference(item: InferenceItem, api_key: APIKey = Depends(get_api_key)):
+    if item not in inference_storage:
         raise HTTPException(status_code=404, detail="Inference not found")
-    return {"id": id, "inference": inference_storage[id]}
+    return produce_prompt_inference(user_id=item.id, prompt=item.id)
 
 
 if __name__ == "__main__":

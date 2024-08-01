@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated embedings and query with fastembed">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/document_chunks.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/document_chunks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/prompt_embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/enhanced_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/apis.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/apis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/data_embed.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/user_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/user_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/vector_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/vector_db.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +249,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722449195630</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="updated embedings and query with fastembed">
+      <option name="closed" value="true" />
+      <created>1722496749351</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1722496749351</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="UnknownFeatures">

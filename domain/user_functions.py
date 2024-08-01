@@ -1,5 +1,4 @@
 from infrastructure.vector_db import add_collection_data, query_collection
-from domain.data_embed import data_encode
 from domain.document_chunks import chunk_text
 from interface.bot import inference
 
