@@ -50,7 +50,7 @@ async def store_prompt(item: PromptItem, api_key: APIKey = Depends(get_api_key))
     return {"message": "Prompt stored successfully"}
 
 
-@app.get("/inference")
+@app.get("/inference/{user_id}/{prompt}")
 async def get_inference(item: InferenceItem, api_key: APIKey = Depends(get_api_key)):
     return produce_prompt_inference(user_id=item.id, prompt=item.prompt)
 
