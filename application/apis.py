@@ -43,6 +43,7 @@ class InferenceItem(BaseModel):
 @app.post("/data")
 async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
     add_data_or_usr(user_id=item.id, data=item.data)
+    print("Data sent successful!")
 
 
 @app.post("/prompt")
