@@ -3,6 +3,7 @@ from fastapi.security.api_key import APIKeyHeader, APIKey
 from pydantic import BaseModel
 from typing import Dict
 from domain.user_functions import add_data_or_usr, produce_prompt_inference
+from interface.bot import health_updates
 
 app = FastAPI()
 
@@ -23,27 +24,20 @@ class DataItem(BaseModel):
     data: str
 
 
-class PromptItem(BaseModel):
-    id: str
-    prompt: str
-
-
-class InferenceItem(BaseModel):
-    id: str
-    prompt: str
-
-
+# API for handling users and their data.
 @app.post("/data")
 async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
     add_data_or_usr(user_id=item.id, data=item.data)
     return "Data sent successful!"
 
 
-@app.post("/prompt")
-async def store_prompt(item: PromptItem, api_key: APIKey = Depends(get_api_key)):
-    return {"message": "Prompt stored successfully"}
+# API to give every user personalized updates.
+@app.post("/health_updates/{user_id}")
+async def health_update(user_id, api_key: APIKey = Depends(get_api_key)):
+    return health_updates(user_id=user_id)
 
 
+# API to get custom message inference.
 @app.get("/inference/{user_id}")
 async def get_inference(user_id, prompt, api_key: APIKey = Depends(get_api_key)):
     return produce_prompt_inference(user_id=user_id, prompt=prompt)
