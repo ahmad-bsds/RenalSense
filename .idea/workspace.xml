@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="added libn">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated conflicting libs" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -350,7 +348,23 @@
       <option name="project" value="LOCAL" />
       <updated>1722536546823</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="added libss">
+      <option name="closed" value="true" />
+      <created>1722569872206</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1722569872206</updated>
+    </task>
+    <task id="LOCAL-00029" summary="updated conflicting libs">
+      <option name="closed" value="true" />
+      <created>1722570215197</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1722570215197</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -378,6 +392,8 @@
     <MESSAGE value="optimised api" />
     <MESSAGE value="added lib" />
     <MESSAGE value="added libn" />
-    <option name="LAST_COMMIT_MESSAGE" value="added libn" />
+    <MESSAGE value="added libss" />
+    <MESSAGE value="updated conflicting libs" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated conflicting libs" />
   </component>
 </project>
