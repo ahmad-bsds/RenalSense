@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Health Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen bg-gray-100">
+        <nav class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex">
+                        <div class="flex-shrink-0 flex items-center">
+                            <img class="h-8 w-auto" src="/api/placeholder/120/40" alt="Logo">
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Home
+                        </button>
+                        <button class="bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold text-gray-900">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600">
+                        Patient Health Dashboard
+                    </span>
+                </h1>
+                <p class="mt-1 text-sm text-gray-500">Manage your health information and settings</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                        <form action="/submit" method="POST" enctype="multipart/form-data" id="data-form">
+                            <div class="mt-8 space-y-8">
+                                <!-- Personalization Section -->
+                                <div>
+                                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Personalization</h2>
+                                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg">
+                                        <div class="text-sm font-medium text-gray-500">Age</div>
+                                        <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                            <input type="number" name="age" id="age" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                    </div>
+                                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <div class="text-sm font-medium text-gray-500">Gender</div>
+                                        <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                            <select id="gender" name="gender" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                <option>Select Gender</option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-lg">
+                                        <div class="text-sm font-medium text-gray-500">Height (cm)</div>
+                                        <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                            <input type="number" name="height" id="height" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Medical Information Section -->
+                                <div>
+                                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Medical Information</h2>
+                                    <div class="bg-white shadow overflow-hidden sm:rounded-md">
+                                        <ul class="divide-y divide-gray-200">
+                                            <li>
+                                                <div class="px-4 py-4 sm:px-6">
+                                                    <div class="flex items-center justify-between">
+                                                        <p class="text-sm font-medium text-indigo-600 truncate">Do you experience fatigue?</p>
+                                                        <div class="ml-2 flex-shrink-0 flex">
+                                                            <select name="fatigue" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                                <option>Select an option</option>
+                                                                <option>No</option>
+                                                                <option>Yes, mild</option>
+                                                                <option>Yes, moderate</option>
+                                                                <option>Yes, severe</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                           <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you have difficulty concentrating?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="concentration" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you have trouble sleeping?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="sleep"  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you have poor appetite?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="appetite" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you experience muscle cramping?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="cramping" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you have swollen feet and ankles?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="swollen_feet" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you experience puffiness around the eyes in the morning?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="puffiness"  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you have dry, scaly skin?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="dry_skin"  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you experience frequent urination, especially late at night?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="urination" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you experience nausea?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="nausea" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you experience vomiting?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="vomiting" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Have you noticed changes in urine output?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="urine_output" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="increased">Yes, increased</option>
+                                                            <option value="decreased">Yes, decreased</option>
+                                                            <option value="color-change">Yes, color change</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you have inflammation of the pericardium?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="pericardium" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">Do you have high blood pressure?</p>
+                                                    <div class="ml-2 flex-shrink-0 flex">
+                                                        <select name="nausea" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                            <option value="">Select an option</option>
+                                                            <option value="no">No</option>
+                                                            <option value="mild">Yes, mild</option>
+                                                            <option value="moderate">Yes, moderate</option>
+                                                            <option value="severe">Yes, severe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           </li>
+                                          </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Upload Documents Section -->
+                                  <div>
+                                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Upload Documents</h2>
+                                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                        <div class="space-y-1 text-center">
+                                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                            <div class="flex text-sm text-gray-600">
+                                                <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                    <span>Upload a file</span>
+                                                    <input id="file-upload" name="file-upload" type="file" class="sr-only" multiple accept=".txt,.doc,.docx,.pdf/*" onchange="updateFileList(this)">
+                                                </label>
+                                                <p class="pl-1">or drag and drop</p>
+                                            </div>
+                                            <p class="text-xs text-gray-500">TXT, DOC, DOCX, PDF up to 10MB</p>
+                                        </div>
+                                    </div>
+                                    <div id="file-list" class="mt-2 text-sm text-gray-500"></div>
+                                </div>
+
+                                <!-- Additional Information Section -->
+                                <div>
+                                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Additional Information</h2>
+                                    <div>
+                                        <textarea rows="4" name="comment" id="comment" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Enter any additional information here"></textarea>
+                                    </div>
+                                    <div class="mt-4 flex justify-end">
+                                        <button type="submit" onclick="submitForm()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Send data
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- System Section -->
+                                <div>
+                                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">System</h2>
+                                    <div class="bg-white shadow overflow-hidden sm:rounded-md">
+                                        <ul class="divide-y divide-gray-200">
+                                            <li>
+                                                <a href="#" class="block hover:bg-gray-50">
+                                                    <div class="flex items-center px-4 py-4 sm:px-6">
+                                                        <div class="min-w-0 flex-1 flex items-center">
+                                                            <div class="flex-shrink-0">
+                                                                <i class="fas fa-key text-gray-400"></i>
+                                                            </div>
+                                                            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                                                                <div>
+                                                                    <p class="text-sm font-medium text-indigo-600 truncate">Change Password</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <i class="fas fa-chevron-right text-gray-400"></i>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="block hover:bg-gray-50">
+                                                    <div class="flex items-center px-4 py-4 sm:px-6">
+                                                        <div class="min-w-0 flex-1 flex items-center">
+                                                            <div class="flex-shrink-0">
+                                                                <i class="fas fa-comment-alt text-gray-400"></i>
+                                                            </div>
+                                                            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                                                                <div>
+                                                                    <p class="text-sm font-medium text-indigo-600 truncate">Provide Feedback</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <i class="fas fa-chevron-right text-gray-400"></i>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="mt-4 text-sm text-gray-500">
+                                        Version: 1.0.0
+                                    </div>
+                                </div>
+
+                                <!-- About Us Section -->
+                                <div>
+                                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">About Us</h2>
+                                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                                        <div class="px-4 py-5 sm:px-6">
+                                            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                                                We are dedicated to providing comprehensive care for patients with kidney-related issues. Our team of specialists is committed to helping you manage your health effectively.
+                                            </p>
+                                        </div>
+                                    </div>
+                               </div>
+                     </form>
+                </div>
+            </div>
+            </div>
+        </main>
+
+    <script>
+        function updateFileList(input) {
+            const fileList = document.getElementById('file-list');
+            fileList.innerHTML = '';
+            for (let i = 0; i < input.files.length; i++) {
+                const fileName = document.createElement('p');
+                fileName.textContent = `Selected file ${i + 1}: ${input.files[i].name}`;
+                fileList.appendChild(fileName);
+            }
+        }
+
+        function submitForm() {
+            const form = document.getElementById('data-form');
+            const formData = new FormData(form);
+
+            fetch('/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Data submitted successfully!');
+                console.log(data); // Optional: Log the response data to the console
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the data.');
+            });
+        }
+    </script>
+
+</body>
+</html>

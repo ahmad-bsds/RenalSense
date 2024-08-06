@@ -1,6 +1,6 @@
 from infrastructure.vector_db import add_collection_data, query_collection
 from domain.document_chunks import chunk_text
-from interface.bot import inference
+from inference.bot import inference
 
 
 def add_data_or_usr(user_id: str, data):

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+
+    .btn-login {
+      width: 100%;
+      margin-bottom: 10px;
+      background-color: #28a745;
+      border-color: #28a745;
+      color: #fff;
+    }
+
+    .btn-login:hover {
+      background-color: #1c7430;
+      border-color: #1c7430;
+    }
+
+    .btn-login:focus {
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+
+/* style for text input fields */
+input[type="text"] {
+  border: 2px solid #4CAF50; /* Green border */
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #007BFF; /* Blue border on focus */
+  box-shadow: 0 0 5px #007BFF; /* Add a subtle shadow on focus */
+}
+
+/* style for text input fields */
+input[type="password"] {
+  border: 2px solid #4CAF50; /* Green border */
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+input[type="password"]:focus {
+  outline: none;
+  border-color: #007BFF; /* Blue border on focus */
+  box-shadow: 0 0 5px #007BFF; /* Add a subtle shadow on focus */
+}
+
+
+
+/* Custom style for the submit button */
+input[type="submit"] {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 7px 20px; /* Decreased padding from 10px to 7px */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px; /* Decreased font size from 16px to 14px */
+}
+
+/* Hover effect for the submit button */
+input[type="submit"]:hover {
+  background-color: #0056b3;
+  /* You can change the color or add other styles as per your preference */
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="text-center">Sign Up</h2>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+         <p style="color: red">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form  method="post">
+        {{ form.csrf_token }}<br>
+<!--      if any error-->
+        {% if form.name.errors %}
+        <ul class="errors">
+        {% for error in form.name.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+<!--      fields-->
+      <div class="form-group">
+        {{form.name.label}}<br>
+        {{form.name}}
+      </div>
+      <div class="form-group">
+        {{form.email.label}}<br>
+        {{form.email}}
+      </div>
+      <div class="form-group">
+        {{form.password.label}}<br>
+        {{form.password}}
+      </div>
+      <div class="form-group">
+        {{form.confirm.label}}<br>
+        {{form.confirm}}<br><br>
+<!--          Register button.-->
+        {{form.register}}
+      </div>
+    </form>
+    <a href={{ url_for("login") }}><button type="button" class="btn btn-success btn-login">Login</button></a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

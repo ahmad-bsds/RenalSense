@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    .btn-login {
+      width: 100%;
+      margin-bottom: 10px;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-login:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    .btn-login:focus {
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .btn-signup {
+      width: 100%;
+      margin-bottom: 10px;
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .btn-signup:hover {
+      background-color: #1c7430;
+      border-color: #1c7430;
+    }
+
+    .btn-signup:focus {
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+
+    .btn-forgot {
+      text-align: center;
+    }
+
+    .btn-forgot a {
+      color: #007bff;
+    }
+
+    .btn-forgot a:hover {
+      color: #0056b3;
+    }
+
+    /* style for text input fields */
+input[type="text"] {
+  border: 2px solid #4CAF50; /* Green border */
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #007BFF; /* Blue border on focus */
+  box-shadow: 0 0 5px #007BFF; /* Add a subtle shadow on focus */
+}
+
+/* style for text input fields */
+input[type="password"] {
+  border: 2px solid #4CAF50; /* Green border */
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+input[type="password"]:focus {
+  outline: none;
+  border-color: #007BFF; /* Blue border on focus */
+  box-shadow: 0 0 5px #007BFF; /* Add a subtle shadow on focus */
+}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="text-center">Login</h2>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+         <p style="color: red">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="post">
+      <div class="form-group">
+        {{ form.csrf_token }}<br>
+        {{form.email.label}}<br>
+        {{form.email}}
+      </div>
+      <div class="form-group">
+        {{form.password.label}}<br>
+        {{form.password}}
+      </div>
+      <button type="submit" class="btn btn-primary btn-login">Login</button>
+    </form>
+    <a href={{ url_for("signup") }}><button type="button" class="btn btn-success btn-signup">Sign Up</button></a>
+    <div class="btn-forgot">
+      <a href="#">Forgot Password?</a>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
