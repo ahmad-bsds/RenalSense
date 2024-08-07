@@ -1,4 +1,6 @@
-from flask import Flask  # Import Flask here
+"""
+Run flask and fasst api here.
+"""
 from application.api import fast_app
 from fastapi.middleware.wsgi import WSGIMiddleware
 from application.app import flask_app

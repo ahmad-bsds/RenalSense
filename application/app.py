@@ -187,6 +187,7 @@ def submit():
     # Add extracted texts to the response
     response["Extracted Texts"] = extracted_texts
 
+    print(response)
     # Redirect to a success page or perform other actions
     return redirect("user_home")
 
@@ -206,7 +207,7 @@ def signup():
         if not chk_pass(email):
             hashed = hashPass(password)
             add_data(user_id=user_id, name=name, email=email, password=str(hashed))
-            return redirect('/settings')
+            return redirect('/app/settings')
         else:
             flash('Email already exists.')  # To show message.
     return render_template('signUp.html', form=form)
@@ -240,7 +241,7 @@ def login():
             user = User(user_data['id'], user_data['name'], user_data['email'], user_data['password'])
             # flask_login method to store session of logging.
             login_user(user)
-            return redirect('/user_home')
+            return redirect('/app/user_home')
         else:
             flash('Password error')
     return render_template('login.html', form=form)
