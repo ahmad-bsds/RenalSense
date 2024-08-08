@@ -189,7 +189,7 @@ def submit():
     response["Extracted Texts"] = extracted_texts
     # Add submitted data.
     data_send(user_id=str(current_user.id), data=str(response))
-
+    print(f"Data added by {current_user.id}")
     # Redirect to a success page or perform other actions
     return redirect("user_home")
 
@@ -211,6 +211,7 @@ def signup():
             add_data(user_id=user_id, name=name, email=email, password=str(hashed))
             # Create a user in vector database.
             data_send(user_id=str(user_id), data="")
+            print(f"user {user_id} added")
             return redirect('/app/settings')
         else:
             flash('Email already exists.')  # To show message.

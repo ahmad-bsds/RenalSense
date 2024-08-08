@@ -32,6 +32,7 @@ Here are some of output requirements:
 -Write in a way that data needs to be embed and search latter so keep the formate accordingly.
 -Don't use personal info such as: "name, medical record number, date of report however use age for logical research and\
 insights building."
+- If the data in json extract relevant insight based on available data.
 """
 
 # Defining template.
