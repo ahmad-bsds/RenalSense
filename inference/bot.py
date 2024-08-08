@@ -20,6 +20,8 @@ chat = ChatOpenAI(
     api_key=AI71_API_KEY,
     base_url=AI71_BASE_URL,
     streaming=True,
+    max_tokens=50,
+    temperature=0
 )
 
 template_string = """Lets you are a kidney doctor and provide me answer of {prompt} from \

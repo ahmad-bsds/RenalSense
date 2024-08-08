@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="Combined flask and fast api.">
+    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration.">
+      <change afterPath="$PROJECT_DIR$/application/templates/404.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/templates/homepage.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/templates/homepage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/templates/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/templates/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/templates/signUp.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/templates/signUp.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/templates/user_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/templates/user_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/bot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -58,6 +65,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Python.api.executor&quot;: &quot;Run&quot;,
     &quot;Python.apis.executor&quot;: &quot;Run&quot;,
     &quot;Python.app.executor&quot;: &quot;Run&quot;,
@@ -68,6 +76,7 @@
     &quot;Python.retrieval.executor&quot;: &quot;Run&quot;,
     &quot;Python.test.executor&quot;: &quot;Run&quot;,
     &quot;Python.user_functions.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
     &quot;Python.vector_db.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -82,7 +91,7 @@
       <recent name="F:\renal-sense\application" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.api">
     <configuration name="api" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonProject" />
       <option name="ENV_FILES" value="" />
@@ -97,6 +106,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="F:\renal-sense\application\api.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/application" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/application/app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -151,6 +182,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.app" />
         <item itemvalue="Python.api" />
         <item itemvalue="Python.retrieval" />
         <item itemvalue="Python.data_embed" />
@@ -469,7 +501,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722970026185</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="updated files and enhanced integration.">
+      <option name="closed" value="true" />
+      <created>1723009203971</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1723009203971</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -502,6 +542,7 @@
     <MESSAGE value="updated conflicting libs" />
     <MESSAGE value="changed name from apis to app" />
     <MESSAGE value="Combined flask and fast api." />
-    <option name="LAST_COMMIT_MESSAGE" value="Combined flask and fast api." />
+    <MESSAGE value="updated files and enhanced integration." />
+    <option name="LAST_COMMIT_MESSAGE" value="updated files and enhanced integration." />
   </component>
 </project>

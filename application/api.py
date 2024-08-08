@@ -43,6 +43,6 @@ async def get_inference(user_id, prompt, api_key: APIKey = Depends(get_api_key))
     return produce_prompt_inference(user_id=user_id, prompt=prompt)
 
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(fast_app)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(fast_app)

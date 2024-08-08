@@ -1,12 +1,13 @@
-from flask import Flask, render_template, request, redirect, flash, jsonify
+from flask import Flask, render_template, request, redirect, flash, jsonify, url_for
 from infrastructure.utils import RegistrationForm, LoginForm
-from flask_login import LoginManager, login_required, login_user
+from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from infrastructure.utils import hashPass, matchHash
 import uuid
 import os
 from werkzeug.utils import secure_filename
 import docx2txt
 import PyPDF2
+from application.utils import data_send, update, inference
 
 # Flask setup.
 flask_app = Flask(__name__)
@@ -66,7 +67,7 @@ def refresh():
 def chat():
     user_message = request.form.get('message')
     print(f"User: {user_message}")
-    return jsonify({'response': BOT_RESPONSE})
+    return jsonify({'response': inference(user_id=str(current_user.id), prompt=user_message)})
 
 
 # when user upload something.
@@ -186,8 +187,9 @@ def submit():
 
     # Add extracted texts to the response
     response["Extracted Texts"] = extracted_texts
+    # Add submitted data.
+    data_send(user_id=str(current_user.id), data=str(response))
 
-    print(response)
     # Redirect to a success page or perform other actions
     return redirect("user_home")
 
@@ -207,10 +209,24 @@ def signup():
         if not chk_pass(email):
             hashed = hashPass(password)
             add_data(user_id=user_id, name=name, email=email, password=str(hashed))
+            # Create a user in vector database.
+            data_send(user_id=str(user_id), data="")
             return redirect('/app/settings')
         else:
             flash('Email already exists.')  # To show message.
     return render_template('signUp.html', form=form)
+
+
+@flask_app.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('homepage'))
+
+
+@flask_app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html")
 
 
 @login_manager.user_loader
@@ -241,6 +257,7 @@ def login():
             user = User(user_data['id'], user_data['name'], user_data['email'], user_data['password'])
             # flask_login method to store session of logging.
             login_user(user)
+
             return redirect('/app/user_home')
         else:
             flash('Password error')
@@ -252,5 +269,5 @@ def home():
     return render_template('homepage.html')
 
 
-if __name__ == "__main__":
-    flask_app.run(debug=True)
+# if __name__ == "__main__":
+#     flask_app.run(debug=True)
