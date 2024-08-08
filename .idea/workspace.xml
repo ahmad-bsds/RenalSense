@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/templates/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/templates/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/enhanced_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/enhanced_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/templates/user_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/templates/user_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -510,7 +509,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723093195257</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="updated files and enhanced integration.">
+      <option name="closed" value="true" />
+      <created>1723098983957</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1723098983957</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="UnknownFeatures">

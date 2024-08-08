@@ -53,54 +53,64 @@
         .message.ai span {
             background-color: #ffffff;
         }
+
+        .tips {
+        ::-webkit-scrollbar {
+                              width: 0px;
+                              background: transparent; /* Make scrollbar transparent */
+                            }
+
+
+        }
     </style>
 </head>
-<body class="" style="background-color: #FFF8F3;">
-    <header class="bg-white shadow-md py-6 mb-8">
+<body class="" style="background-color: #0B0C10;">
+    <header class="shadow-md py-6 mb-8" style="background-color: #0B0C10;">
         <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl font-bold text-blue-600">Renal Sense</h1>
-            <p class="text-gray-600 mt-2">Your personal kidney health companion</p>
+            <h1 class="text-4xl font-bold" style="color: #66FCF1;">Renal Sense</h1>
+            <p class="mt-2" style="color: #C5C6C7;">Your personal kidney health companion</p>
         </div>
     </header>
 
     <div class="container mx-auto px-4 pb-8 md:flex md:space-x-4">
         <!-- Left Side - Profile Card -->
         <div class="md:w-1/3 mb-8 md:mb-0">
-            <div class="bg-white rounded-lg shadow-lg p-6 card-height overflow-y-auto">
-                <div class="flex items-center mb-6">
+            <div class="rounded-lg shadow-lg p-6 card-height overflow-y-auto" style="background-color: #152833;">
+                <div class="flex items-center mb-6" style="color: #66FCF1;">
                     <img src="./pic.jpg" alt="Profile Picture" class="w-16 h-16 rounded-full mr-4">
                     <h2 class="text-xl font-semibold">Hi! John Doe,<br>How can I help you?</h2>
                 </div>
                 <div class="flex justify-center space-x-4 mb-6">
                     <button class="bg-blue-500 text-white px-4 py-2 rounded-full" onclick="window.location.href='/app/settings'"><i class="fas fa-cog"></i> Settings</button>
                     <button id="refresh-btn" class="bg-green-500 text-white px-4 py-2 rounded-full"><i class="fas fa-refresh"></i> Refresh</button>
+                    <button id="report-btn" class="bg-red-500 text-white px-4 py-2 rounded-full"><i class="fas fa-file"></i> Send Report</button>
                 </div>
                 <div class="mb-6">
-                    <h3 class="text-lg font-semibold mb-4">Health Stats</h3>
+                    <h3 class="text-lg font-semibold mb-4" style="color: #66FCF1;">Health Stats</h3>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="text-center">
                             <div class="bg-blue-100 rounded-full p-3 mb-2 inline-block">
                                 <i class="fas fa-chart-line text-blue-500 text-2xl"></i>
                             </div>
-                            <p class="font-semibold">Stage</p>
-                            <p class="text-2xl font-bold text-blue-500">{{ health_stats.stage }}</p>
-                            <p class="text-sm text-gray-500">CKD</p>
+                            <p class="font-semibold" style="color: #ffffff;">CKD Stage</p>
+                            <p class="text-2xl font-bold text-blue-500" >{{ health_stats.stage }}</p>
+<!--                            <p class="text-sm text-gray-500">CKD</p>-->
                         </div>
                         <div class="text-center">
                             <div class="bg-green-100 rounded-full p-3 mb-2 inline-block">
-                                <i class="fas fa-tint text-green-500 text-2xl"></i>
+                                <i class="fas fa-heartbeat text-white text-2xl"></i>
                             </div>
-                            <p class="font-semibold">GFR</p>
+                            <p class="font-semibold" style="color: #ffffff;">Risk</p>
                             <p class="text-2xl font-bold text-green-500">{{ health_stats.gfr }}</p>
-                            <p class="text-sm text-gray-500">mL/min</p>
+<!--                            <p class="text-sm text-gray-500"></p>-->
                         </div>
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Daily Recommendations</h3>
-                    <div class="space-y-4 blog-scroll">
+                    <h3 class="text-lg font-semibold mb-4" style="color: #66FCF1;">Daily Recommendations</h3>
+                    <div class="space-y-4 blog-scroll" style="color: #ffffff;">
                         {% for rec in recommendations %}
-                        <div class="flex items-center bg-blue-50 p-3 rounded-lg">
+                        <div class="flex items-center p-3 rounded-lg" style="background-color: #76ABAE;">
                             <div class="bg-blue-100 rounded-full p-2 mr-3">
                                 <i class="{{ rec.icon }} text-blue-500"></i>
                             </div>
@@ -117,9 +127,9 @@
 
         <!-- Middle - Chat Area -->
         <div class="md:w-1/3 mb-8 md:mb-0">
-            <div class="bg-white rounded-lg shadow-lg p-6 card-height flex flex-col">
-                <h2 class="text-2xl font-semibold mb-4">Chat with AI Assistant</h2>
-                <div id="chat-messages" class="flex-grow overflow-y-auto mb-4 rounded p-4" style="background-color: #F7E7DC;">
+            <div class="rounded-lg shadow-lg p-6 card-height flex flex-col" style="background-color: #152833;">
+                <h2 class="text-2xl font-semibold mb-4" style="color: #66FCF1;">Chat with AI Assistant</h2>
+                <div id="chat-messages" class="flex-grow overflow-y-auto mb-4 rounded p-4" style="background-color: #45a29e;">
                     <!-- Messages will be appended here -->
                 </div>
                 <div class="flex items-center">
@@ -137,38 +147,38 @@
         </div>
 
         <!-- Right Side - Health Blog Threads -->
-        <div class="md:w-1/3">
-            <div class="bg-white rounded-lg shadow-lg p-6 card-height">
-                <h2 class="text-2xl font-semibold mb-4">Health Tips</h2>
+        <div class="md:w-1/3 tips">
+            <div class="rounded-lg shadow-lg p-6 card-height" style="background-color: #152833;">
+                <h2 class="text-2xl font-semibold mb-4" style="color: #66FCF1;">Health Tips</h2>
                 <div class="blog-scroll space-y-4">
-                    <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class=" p-4 rounded-lg" style="background-color: #0B0C10; color: #c5c6c7;">
                         <div class="flex items-center mb-3">
                             <img src="https://i.pravatar.cc/40?img=1" alt="Dr. Sarah Johnson" class="w-10 h-10 rounded-full mr-3">
                             <div>
                                 <h4 class="font-semibold">Dr. Sarah Johnson</h4>
-                                <p class="text-xs text-gray-500">Nephrologist</p>
+                                <p class="text-xs" style=": #c5c6c7;">Nephrologist</p>
                             </div>
                         </div>
                         <h3 class="font-semibold mb-2">Importance of Hydration</h3>
                         <p class="text-sm">Staying hydrated is crucial for kidney health. Aim for 8 glasses of water daily to help flush toxins and maintain proper kidney function. However, some kidney conditions may require fluid restriction, so always consult your doctor for personalized advice. Remember, other fluids like herbal tea or flavored water can count towards your daily intake, making hydration more enjoyable.</p>
                     </div>
-                    <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="p-4 rounded-lg" style="background-color: #0b0c10; color: #c5c6c7;">
                         <div class="flex items-center mb-3">
                             <img src="https://i.pravatar.cc/40?img=2" alt="Dr. Michael Lee" class="w-10 h-10 rounded-full mr-3">
                             <div>
                                 <h4 class="font-semibold">Dr. Michael Lee</h4>
-                                <p class="text-xs text-gray-500">Dietitian</p>
+                                <p class="text-xs" style=": #c5c6c7;">Dietitian</p>
                             </div>
                         </div>
                         <h3 class="font-semibold mb-2">Low-Sodium Diet Tips</h3>
                         <p class="text-sm">Reducing sodium intake can help manage blood pressure and slow kidney disease progression. Choose fresh foods and avoid processed items high in salt. When cooking, use herbs and spices instead of salt for flavor. Read food labels carefully, as sodium can hide in unexpected places. Aim for less than 2,000mg of sodium per day, but consult your healthcare provider for personalized recommendations.</p>
                     </div>
-                    <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="p-4 rounded-lg" style="background-color: #0b0c10; color: #c5c6c7;">
                         <div class="flex items-center mb-3">
                             <img src="https://i.pravatar.cc/40?img=3" alt="Emma Thompson" class="w-10 h-10 rounded-full mr-3">
                             <div>
                                 <h4 class="font-semibold">Emma Thompson</h4>
-                                <p class="text-xs text-gray-500">Physical Therapist</p>
+                                <p class="text-xs" style=": #c5c6c7;">Physical Therapist</p>
                             </div>
                         </div>
                         <h3 class="font-semibold mb-2">Exercise and Kidney Health</h3>
@@ -179,14 +189,14 @@
         </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg">
-        <div class="flex justify-around py-4">
-            <button class="text-blue-500"><i class="fas fa-user"></i></button>
-            <button class="text-blue-500"><i class="fas fa-comments"></i></button>
-            <button class="text-blue-500"><i class="fas fa-newspaper"></i></button>
-        </div>
-    </div>
+<!--    &lt;!&ndash; Mobile Menu &ndash;&gt;-->
+<!--    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg">-->
+<!--        <div class="flex justify-around py-4">-->
+<!--            <button class="text-blue-500"><i class="fas fa-user"></i></button>-->
+<!--            <button class="text-blue-500"><i class="fas fa-comments"></i></button>-->
+<!--            <button class="text-blue-500"><i class="fas fa-newspaper"></i></button>-->
+<!--        </div>-->
+<!--    </div>-->
 
 <script type="text/javascript">
     // Get DOM elements
