@@ -11,9 +11,13 @@ load_dotenv(dotenv_path='../.env')
 
 # Access the API key
 fa_api_key = os.getenv('FALCON_API_KEY')
-
 AI71_BASE_URL = "https://api.ai71.ai/v1/"
 AI71_API_KEY = fa_api_key
+
+# All of these APIs are just for representation purpose.
+QDRANT_API_KEY = "Fbo3AybCrGPnWhP2KajA2e0so7_Mz313wleg10ESKFzBB73v5G3JZQ"
+FALCON_API_KEY = "api71-api-95a38584-2219-4703-926a-250532246774"
+os.environ.setdefault("OPENAI_API_KEY", FALCON_API_KEY)
 
 chat = ChatOpenAI(
     model="tiiuae/falcon-180B-chat",
