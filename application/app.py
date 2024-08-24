@@ -18,18 +18,21 @@ login_manager.init_app(flask_app)
 
 # ================== User dashboard management ====================
 # Sample data
-health_stats = {
-    'stage': 3,
-    'gfr': 45
-}
 
-recommendations = [
-    {'icon': 'fas fa-utensils', 'title': 'Low-sodium diet',
-     'description': 'Aim for less than 2,000mg of sodium per day'},
-    {'icon': 'fas fa-glass-water', 'title': 'Stay hydrated', 'description': 'Drink 8-10 glasses of water daily'},
-    {'icon': 'fas fa-dumbbell', 'title': 'Regular exercise',
-     'description': '30 minutes of moderate activity, 5 days a week'}
-]
+# recommendations = [
+#     {
+#         'stage': 3,
+#         'risk': "High"
+#     },
+#     {'icon': 'fas fa-utensils', 'title': 'Low-sodium diet',
+#      'description': 'Aim for less than 2,000mg of sodium per day'},
+#     {'icon': 'fas fa-glass-water', 'title': 'Stay hydrated', 'description': 'Drink 8-10 glasses of water daily'},
+#     {'icon': 'fas fa-dumbbell', 'title': 'Regular exercise',
+#      'description': '30 minutes of moderate activity, 5 days a week'}
+# ]
+
+recommendations = update(current_user.id)
+health_stats =  recommendations[0]
 
 # Chatbot response
 BOT_RESPONSE = "Welcome!"

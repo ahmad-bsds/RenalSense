@@ -50,10 +50,18 @@ def inference(similarity_data, user_prompt):
 
 health_update_template_string = """
 Your task is to understand this {data} and provide me kidney health insights and recommendations.\
-FORMATE OF OUTPUT:
-Insights:
-Stage: x
-Type of kidney disease: this is your kidney disease.
+Your output must be a single list containing dictionaries, structured as follows:
+[
+    {
+        'stage': int(0-5),
+        'risk': str(High-Medium-Low)
+    },
+    {'icon': str(font awesome icon id), 'title': str,
+     'description': str},
+    {'icon': str(font awesome icon id), 'title': str, 'description': str},
+    {'icon': str(font awesome icon id), 'title': str,
+     'description': str}
+]
 ---------------------------------------------------------
 Recommendations:
 Here are recommendations based on data provided.

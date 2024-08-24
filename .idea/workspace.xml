@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pythonProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/templates/user_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/templates/user_home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inference/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
