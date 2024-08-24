@@ -31,8 +31,6 @@ login_manager.init_app(flask_app)
 #      'description': '30 minutes of moderate activity, 5 days a week'}
 # ]
 
-recommendations = update(current_user.id)
-health_stats =  recommendations[0]
 
 # Chatbot response
 BOT_RESPONSE = "Welcome!"
@@ -46,6 +44,9 @@ file_flag = None
 @flask_app.route('/user_home')
 @login_required
 def user_home():
+    recommendations = update(current_user.id)
+    health_stats =  recommendations[0]
+
     return render_template('user_home.html', health_stats=health_stats, recommendations=recommendations)
 
 
