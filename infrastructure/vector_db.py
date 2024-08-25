@@ -18,7 +18,7 @@ qdrant_client = QdrantClient(
 
 def add_collection_data(user_id: str, docs, ids, metadata=None):
     """Collection to add new data into the collection by user id against related collection."""
-    qdrant_client.add(
+    return qdrant_client.add(
         collection_name=user_id,
         documents=docs,
         metadata=metadata,
@@ -28,7 +28,7 @@ def add_collection_data(user_id: str, docs, ids, metadata=None):
 
 def delete_collection(user_id: str):
     """Function to delete the collection in case user delete his/her account"""
-    qdrant_client.delete_collection(collection_name=f"{user_id}")
+    return qdrant_client.delete_collection(collection_name=f"{user_id}")
 
 
 def query_collection(user_id, prompt):
