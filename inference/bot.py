@@ -96,4 +96,4 @@ def health_updates(user_id):
 
     response = chat(message)
 
-    return response.content
+    return list(response.content)

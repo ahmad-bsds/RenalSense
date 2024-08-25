@@ -18,7 +18,7 @@ login_manager.init_app(flask_app)
 
 # ================== User dashboard management ====================
 # Sample data
-
+#
 # recommendations = [
 #     {
 #         'stage': 3,
@@ -30,9 +30,8 @@ login_manager.init_app(flask_app)
 #     {'icon': 'fas fa-dumbbell', 'title': 'Regular exercise',
 #      'description': '30 minutes of moderate activity, 5 days a week'}
 # ]
-
-recommendations = update(current_user.id)
-health_stats =  recommendations[0]
+#
+# health_stats = recommendations[0]
 
 # Chatbot response
 BOT_RESPONSE = "Welcome!"
@@ -46,6 +45,8 @@ file_flag = None
 @flask_app.route('/user_home')
 @login_required
 def user_home():
+    recommendations = update(str(current_user.id))
+    health_stats = recommendations[0]
     return render_template('user_home.html', health_stats=health_stats, recommendations=recommendations)
 
 
