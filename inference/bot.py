@@ -139,4 +139,4 @@ def health_updates(user_id):
 
 
 
-print(health_updates("97148076364870717344591996034064565110"))
+# print(health_updates("97148076364870717344591996034064565110"))
