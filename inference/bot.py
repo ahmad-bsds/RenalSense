@@ -1,15 +1,14 @@
 import json
-
 import openai
 from langchain.prompts import ChatPromptTemplate
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
-from langchain_community.utils.openai_functions import convert_pydantic_to_openai_function
 from dotenv import load_dotenv
-import time
 import os
+from utils import get_logger
 from infrastructure.vector_db import query_collection
-from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
+
+logger = get_logger(__name__)
 
 # Load the environment variables from the .env file at the specified path
 load_dotenv(dotenv_path='../.env')
@@ -48,36 +47,10 @@ def inference(similarity_data, user_prompt):
     )
 
     response = chat(message)
+    logger.info("Response created for inference.")
 
     return response.content
 
-
-# health_update_template_string = """
-# Your task is to understand this {Your health is normal} and provide me kidney health insights and recommendations.\
-# Your output must be a single list containing dictionaries, structured as follows:
-# [
-#     {
-#         'stage': int(0-5),
-#         'risk': str(High-Medium-Low)
-#     },
-#     {'icon': str(font awesome icon id), 'title': str,
-#      'description': str},
-#     {'icon': str(font awesome icon id), 'title': str, 'description': str},
-#     {'icon': str(font awesome icon id), 'title': str,
-#      'description': str}
-# ]
-# ---------------------------------------------------------
-# Recommendations:
-# Here are recommendations based on data provided.
-#
-# Requirements:
-# - Act like a kidney doctor.
-# - Answer after a huge research, medical inference and under standing logic of data and potential things.
-# - Be concise, be true.
-# - If you dont have answer write NULL.
-# - If there is no stage or disease write --
-# - Don't make any hypothetical answer, give genuine answers.
-# """
 
 prompt_template = ChatPromptTemplate.from_template(
 """
@@ -101,14 +74,25 @@ def health_updates(user_id):
     def similarity_data_() -> json:
         """Function to retrieve relevant health data."""
         srh_r = query_collection(user_id=user_id, prompt=prompt)
-        search = ""
-        n = len(srh_r)
-        for i in range(n):
-            search += (srh_r[i].metadata['document'])
-        return str(search)
+        if srh_r:
+            search = ""
+            n = len(srh_r)
+            for i in range(n):
+                search += (srh_r[i].metadata['document'])
+            return str(search)
+        else:
+            logger.error(f"Qdrant Data Querying failed for health updates. {srh_r}")
+            return {
+                'stage': None,
+                'risk': None,
+                'recommendations': ['Error loading recommendations']
+            }
+
+
 
     chain = prompt_template | chat
     response = chain.invoke({"data": similarity_data_()}).content
+    # logger.info("Response successful for health updates.")
 
     # Your malformed JSON string
     json_string = response
@@ -124,11 +108,12 @@ def health_updates(user_id):
             # Parse the valid JSON
             json_data = json.loads(valid_json_string)
             print(json_data)
+            logger.info(f"Json successful {json_data}")
             return json_data
         except json.JSONDecodeError as e:
-            print(f"Error parsing JSON: {e}")
+            logger.error(f"Error parsing JSON: {e}")
     else:
-        print("No valid JSON found.")
+        logger.info("No valid JSON found.")
 
     # If there is error.
     return {

@@ -3,6 +3,7 @@ from infrastructure.mongo_db import get_user_by_id
 from flask_login import UserMixin
 from wtforms import StringField, PasswordField, validators, SubmitField
 from flask_wtf import FlaskForm
+import logging
 
 """
 Mechanism to hash password for security.
@@ -64,3 +65,23 @@ class LoginForm(FlaskForm):
     """Blueprint for login form."""
     email = StringField('Email Address', [validators.Length(min=6, max=35)])
     password = PasswordField('Password', [validators.DataRequired()])
+
+
+def get_logger(name: str) -> logging.Logger:
+    """
+    Template for getting a logger.
+
+    Args:
+        name: Name of the logger.
+
+    Returns: Logger.
+    """
+
+    # Configure
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s"
+    )
+    logger = logging.getLogger(name)
+
+    return logger

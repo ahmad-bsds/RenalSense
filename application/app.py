@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, flash, jsonify, url_for
+
+import utils
 from infrastructure.utils import RegistrationForm, LoginForm
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from infrastructure.utils import hashPass, matchHash
@@ -9,6 +11,9 @@ from werkzeug.utils import secure_filename
 import docx2txt
 import PyPDF2
 from application.utils import data_send, update, inference
+
+
+logger = utils.get_logger(__name__)
 
 # Flask setup.
 flask_app = Flask(__name__)
@@ -49,14 +54,20 @@ file_flag = None
 @flask_app.route('/user_home')
 @login_required
 def user_home():
-    # Get the data.
-    data = update(current_user.id)
+    # # Get the data.
+    logger.info(f"User {current_user.id} is getting in........")
+    data = {}
+    try:
+        data = update(str(current_user.id))
+        logger.info("Data fetched!")
+    except:
+       logger.error("Recommendation and updates failed!")
     # Check if 'recommendations' is not a list
     if not isinstance(data['recommendations'], list):
         # Convert it to a list
         data['recommendations'] = [data['recommendations']]
     return render_template('user_home.html', health_stats={'stage': data["stage"], 'risk': data["risk"]}, recommendations=data["recommendations"])
-
+    # return render_template('user_home.html', health_stats=health_stats, recommendations=recommendations)
 
 # settings page
 @flask_app.route('/settings')
@@ -69,9 +80,8 @@ def settings():
 @flask_app.route('/refresh', methods=['POST'])
 @login_required
 def refresh():
-    # Simulate data refresh
-    return jsonify({'status': 'success'})
-
+    # return redirect(url_for('user_home.html'))
+    pass
 
 # User chat
 @flask_app.route('/chat', methods=['POST'])
@@ -190,7 +200,7 @@ def submit():
             filename = secure_filename(file.filename)
             file_path = os.path.join(flask_app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
-            print(f"File saved: {filename}")
+            logger.info(f"File saved: {filename}")
 
             # Extract text from the file
             text = extract_text_from_file(file_path)
@@ -201,7 +211,7 @@ def submit():
     response["Extracted Texts"] = extracted_texts
     # Add submitted data.
     data_send(user_id=str(current_user.id), data=str(response))
-    print(f"Data added by {current_user.id}")
+    logger.info(f"Data added by {current_user.id}")
     # Redirect to a success page or perform other actions
     return redirect("user_home")
 
@@ -223,7 +233,7 @@ def signup():
             add_data(user_id=user_id, name=name, email=email, password=str(hashed))
             # Create a user in vector database.
             data_send(user_id=str(user_id), data="")
-            print(f"user {user_id} added")
+            logger.info(f"user {user_id} added")
             return redirect('/app/settings')
         else:
             flash('Email already exists.')  # To show message.

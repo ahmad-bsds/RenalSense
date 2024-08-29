@@ -1,4 +1,5 @@
 import requests
+import logging
 
 DATA_URL = "http://127.0.0.1:8000/data"
 INFERENCE_URL = "http://127.0.0.1:8000/inference/{user_id}"
@@ -67,3 +68,26 @@ def update(user_id: str):
         print("Failed to send health update.")
         print("Status code:", response.status_code)
         print("Response:", response.text)
+
+def get_logger(name: str) -> logging.Logger:
+    """
+    Template for getting a logger.
+
+    Args:
+        name: Name of the logger.
+
+    Returns: Logger.
+    """
+
+    # Configure
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s"
+    )
+    logger = logging.getLogger(name)
+
+    return logger
+
+# print(inference("101664654052127013363854956795422032758", "Hi"))
+# print("------------------------")
+# print(update("101664654052127013363854956795422032758"))

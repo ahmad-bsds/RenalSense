@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration." />
+    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration.">
+      <change afterPath="$PROJECT_DIR$/inference/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/vector_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/vector_db.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -75,6 +86,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\B\Portfolio_Projects\RenalSense\application" />
+      <recent name="D:\B\Portfolio_Projects\RenalSense" />
       <recent name="F:\renal-sense\application" />
     </key>
   </component>
@@ -536,7 +549,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724606421645</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="updated files and enhanced integration.">
+      <option name="closed" value="true" />
+      <created>1724630465342</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1724630465342</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="UnknownFeatures">
