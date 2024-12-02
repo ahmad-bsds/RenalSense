@@ -1,9 +1,11 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from infrastructure.mongo_db import get_user_by_id
+# from infrastructure.mongo_db import get_user_by_id
 from flask_login import UserMixin
 from wtforms import StringField, PasswordField, validators, SubmitField
 from flask_wtf import FlaskForm
 import logging
+import os
+from dotenv import load_dotenv
 
 """
 Mechanism to hash password for security.
@@ -85,3 +87,21 @@ def get_logger(name: str) -> logging.Logger:
     logger = logging.getLogger(name)
 
     return logger
+
+
+def load_env_variable(var_name, env_file_path='./.env'):
+    """
+    Load an environment variable from a custom .env file.
+
+    Parameters:
+    var_name (str): The name of the environment variable to load.
+    env_file_path (str): The path to the .env file (default is '.env').
+
+    Returns:
+    str: The value of the environment variable if found, otherwise None.
+    """
+    # Load the .env file
+    load_dotenv(dotenv_path=env_file_path)
+
+    # Get the environment variable
+    return os.getenv (var_name)

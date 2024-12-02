@@ -1,21 +1,18 @@
 # import fastembed
-from dotenv import load_dotenv
 from qdrant_client import QdrantClient, models
 import os
-from utils import get_logger
+from utils import get_logger, load_env_variable
+
 
 logger = get_logger(__name__)
 
-# Load the environment variables from the .env file at the specified path
-load_dotenv(dotenv_path='../.env')
-
 # Access the API key
 # qd_api_key = os.getenv('QDRANT_API_KEY')
-qd_api_key = "Fbo3AybCrGPnWhP2KajA2e0so7_Mz313wleg10ESKFzBB73v5G3JZQ" #sample api key, will be removed.
+qd_api_key = load_env_variable("QDRANT_API_KEY", "../.env")#sample api key, will be removed.
 
 # Initiating qdrant client.
 qdrant_client = QdrantClient(
-    url="https://09242a5b-7cf2-4398-9e78-88478b9f1f4f.us-east4-0.gcp.cloud.qdrant.io:6333",
+    url=load_env_variable("QDRANT_URL", "../.env"),
     api_key=qd_api_key,
 )
 
