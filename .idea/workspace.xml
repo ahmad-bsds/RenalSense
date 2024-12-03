@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inference/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/vector_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/vector_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,14 +199,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1721804197307</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Commit by AHMAD">
-      <option name="closed" value="true" />
-      <created>1721970827437</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1721970827437</updated>
     </task>
     <task id="LOCAL-00003" summary="Commit by AHMAD">
       <option name="closed" value="true" />
@@ -595,7 +584,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733212145083</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="updated files and enhanced integration.">
+      <option name="closed" value="true" />
+      <created>1733245290406</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1733245290406</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="UnknownFeatures">

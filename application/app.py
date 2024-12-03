@@ -24,19 +24,19 @@ login_manager.init_app(flask_app)
 # ================== User dashboard management ====================
 # Sample data
 #
-# recommendations = [
-#     {
-#         'stage': 3,
-#         'risk': "High"
-#     },
-#     {'icon': 'fas fa-utensils', 'title': 'Low-sodium diet',
-#      'description': 'Aim for less than 2,000mg of sodium per day'},
-#     {'icon': 'fas fa-glass-water', 'title': 'Stay hydrated', 'description': 'Drink 8-10 glasses of water daily'},
-#     {'icon': 'fas fa-dumbbell', 'title': 'Regular exercise',
-#      'description': '30 minutes of moderate activity, 5 days a week'}
-# ]
-#
-# health_stats = recommendations[0]
+recommendations = [
+    {
+        'stage': 3,
+        'risk': "High"
+    },
+    {'icon': 'fas fa-utensils', 'title': 'Low-sodium diet',
+     'description': 'Aim for less than 2,000mg of sodium per day'},
+    {'icon': 'fas fa-glass-water', 'title': 'Stay hydrated', 'description': 'Drink 8-10 glasses of water daily'},
+    {'icon': 'fas fa-dumbbell', 'title': 'Regular exercise',
+     'description': '30 minutes of moderate activity, 5 days a week'}
+]
+
+health_stats = recommendations[0]
 
 
 
@@ -54,19 +54,19 @@ file_flag = None
 @login_required
 def user_home():
     # # Get the data.
-    logger.info(f"User {current_user.id} is getting in........")
-    data = {}
-    try:
-        data = update(str(current_user.id))
-        logger.info("Data fetched!")
-    except:
-       logger.error("Recommendation and updates failed!")
-    # Check if 'recommendations' is not a list
-    if not isinstance(data['recommendations'], list):
-        # Convert it to a list
-        data['recommendations'] = [data['recommendations']]
-    return render_template('user_home.html', health_stats={'stage': data["stage"], 'risk': data["risk"]}, recommendations=data["recommendations"])
-    # return render_template('user_home.html', health_stats=health_stats, recommendations=recommendations)
+  #  logger.info(f"User {current_user.id} is getting in........")
+    # data = {}
+    # try:
+    #     data = update(str(current_user.id))
+    #     logger.info("Data fetched!")
+    # except:
+    #    logger.error("Recommendation and updates failed!")
+    # # Check if 'recommendations' is not a list
+    # if not isinstance(data['recommendations'], list):
+    #     # Convert it to a list
+    #     data['recommendations'] = [data['recommendations']]
+    return render_template('user_home.html', health_stats= health_stats, recommendations= recommendations)
+   # return render_template('user_home.html', health_stats=health_stats, recommendations=recommendations)
 
 # settings page
 @flask_app.route('/settings')
