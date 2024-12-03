@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, flash, jsonify, url_for
-
 import utils
 from infrastructure.utils import RegistrationForm, LoginForm
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user

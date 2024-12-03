@@ -1,35 +1,47 @@
 import pymongo.errors
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
+from project_utils import get_logger
+
+logger = get_logger(__name__)
 
 
 #Establishing mongo conn.
 def database_conn():
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
-    connection_line = "mongodb+srv://ahmadbsds:0177756@cluster0.h62ah.mongodb.net/?retryWrites=true&w=majority"
+    connection_line = "mongodb+srv://ahmadbsds:0177756@cluster0.h62ah.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
     # Create a new client and connect to the server
+    logger.info("Connecting to database")
     my_client = MongoClient(connection_line)
+    logger.info("Success client")
+
     # Send a ping to confirm a successful connection
     try:
         my_client.admin.command('ping')
-        print("Pinged your deployment. You successfully connected to MongoDB!")
+        logger.info("Pinged your deployment. You successfully connected to MongoDB!")
     except Exception as e:
-        print(e, my_client)
+        logger.error(e, my_client)
     # database
     my_db = my_client['app']  # app is my already created database.
-    print("Seccess app")
+    logger.info("Success app")
     # User is like a table in database app. For more see mongodb.
     data_table = my_db['User']
-    print("Seccess usr")
+    logger.info("Success usr")
     return data_table
 
-
-table_data = database_conn()
+table_data = None
+try:
+    table_data = database_conn()
+    logger.info("Success database table.")
+except Exception as e:
+    logger.error(e)
 
 
 def add_data(user_id, name, email, password, data_table=table_data):
     """Used to add data user that will newly be added."""
+    if data_table is None:
+        return 0
     user_data = {
         "id": user_id,
         "name": name,
