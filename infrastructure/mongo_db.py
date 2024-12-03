@@ -30,12 +30,18 @@ def database_conn():
     logger.info("Success usr")
     return data_table
 
-
-table_data = database_conn()
+table_data = None
+try:
+    table_data = database_conn()
+    logger.info("Success database table.")
+except Exception as e:
+    logger.error(e)
 
 
 def add_data(user_id, name, email, password, data_table=table_data):
     """Used to add data user that will newly be added."""
+    if data_table is None:
+        return 0
     user_data = {
         "id": user_id,
         "name": name,
