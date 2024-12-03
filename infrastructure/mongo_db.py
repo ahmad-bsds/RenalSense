@@ -6,7 +6,7 @@ from pymongo.server_api import ServerApi
 #Establishing mongo conn.
 def database_conn():
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
-    connection_line = "mongodb+srv://ahmad-bsds:0177756MA123@intelliapp.cqksfjd.mongodb.net/?appName=IntelliAPP"
+    connection_line = "mongodb+srv://ahmadbsds:0177756@cluster0.h62ah.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
     # Create a new client and connect to the server
     my_client = MongoClient(connection_line)

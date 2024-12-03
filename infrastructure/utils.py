@@ -1,5 +1,5 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-# from infrastructure.mongo_db import get_user_by_id
+from infrastructure.mongo_db import get_user_by_id
 from flask_login import UserMixin
 from wtforms import StringField, PasswordField, validators, SubmitField
 from flask_wtf import FlaskForm
