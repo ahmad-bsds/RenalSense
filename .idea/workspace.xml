@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/mongo_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/mongo_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/vector_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/vector_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +38,8 @@
   </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ahmad-bsds/RenalSense&quot;,
-    &quot;accountId&quot;: &quot;17cdb969-681c-471c-94ab-7643b27c6581&quot;
+    &quot;url&quot;: &quot;https://github.com/ahmad-bsds/RenalSense.git&quot;,
+    &quot;accountId&quot;: &quot;f0395d0a-fbbb-4621-b43d-2c14adbc4845&quot;
   }
 }</component>
   <component name="MarkdownSettingsMigration">
@@ -73,9 +75,10 @@
     &quot;Python.vector_db.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/renal-sense&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/persona-projects/Renal_Sense&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
 }</component>
@@ -86,7 +89,7 @@
       <recent name="F:\renal-sense\application" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.api">
+  <component name="RunManager">
     <configuration name="api" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonProject" />
       <option name="ENV_FILES" value="" />
@@ -187,7 +190,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-eebebe6c2be4-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.15325.20" />
+        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
       </set>
     </attachedChunks>
   </component>

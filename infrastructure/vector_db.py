@@ -1,7 +1,7 @@
 # import fastembed
 from qdrant_client import QdrantClient, models
-import o
-from utils import get_logger, load_env_variable
+import os
+from project_utils import get_logger, load_env_variable
 
 
 logger = get_logger(__name__)
