@@ -5,7 +5,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
 from dotenv import load_dotenv
 import os
-from utils import get_logger
+from project_utils import get_logger
 from infrastructure.vector_db import query_collection
 
 logger = get_logger(__name__)
