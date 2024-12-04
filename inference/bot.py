@@ -73,7 +73,9 @@ def health_updates(user_id):
 
     def similarity_data_() -> json:
         """Function to retrieve relevant health data."""
+        logger.info("""Retrieving data from qdrant...""")
         srh_r = query_collection(user_id=user_id, prompt=prompt)
+        logger.info(f"Data query successful for health updates. {srh_r}")
         if srh_r:
             search = ""
             n = len(srh_r)
@@ -87,7 +89,6 @@ def health_updates(user_id):
                 'risk': None,
                 'recommendations': ['Error loading recommendations']
             }
-
 
 
     chain = prompt_template | chat
