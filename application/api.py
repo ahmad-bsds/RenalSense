@@ -4,6 +4,9 @@ from pydantic import BaseModel
 from typing import Dict
 from domain.user_functions import add_data_or_usr, produce_prompt_inference
 from inference.bot import health_updates
+from project_utils import get_logger
+
+logger = get_logger(__name__)
 
 fast_app = FastAPI()
 
@@ -27,6 +30,7 @@ class DataItem(BaseModel):
 # API for handling users and their data.
 @fast_app.post("/data")
 async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
+    logger.info(f"User {item.id} is getting in........")
     add_data_or_usr(user_id=item.id, data=item.data)
     return "Data sent successful!"
 
@@ -34,12 +38,14 @@ async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
 # API to give every user personalized updates.
 @fast_app.post("/health_updates/{user_id}")
 async def health_update(user_id, api_key: APIKey = Depends(get_api_key)):
+    logger.info(f"User {user_id} is getting health updates........")
     return health_updates(user_id=user_id)
 
 
 # API to get custom message inference.
 @fast_app.get("/inference/{user_id}")
 async def get_inference(user_id, prompt, api_key: APIKey = Depends(get_api_key)):
+    logger.info(f"User {user_id} is getting inference........")
     return produce_prompt_inference(user_id=user_id, prompt=prompt)
 
 

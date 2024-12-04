@@ -35,26 +35,28 @@ try:
     table_data = database_conn()
     logger.info("Success database table.")
 except Exception as e:
-    logger.error(e)
+    logger.error("Error establishing database connection.", e)
 
 
 def add_data(user_id, name, email, password, data_table=table_data):
     """Used to add data user that will newly be added."""
-    if data_table is None:
-        return 0
+    logger.info("Adding data to database")
     user_data = {
         "id": user_id,
         "name": name,
         "email": email,
         "password": password
     }
-    return data_table.insert_one(user_data)
+    data_table.insert_one(user_data)
+    logger.info("Success adding data to database")
 
 
 def chk_pass(email, data_table=table_data):
     """Function to match email in database and if matched then return password accordingly."""
     myquery = {"email": email}
+    logger.info("Checking password")
     mydata = data_table.find(myquery)  # data type is mongodb cursor.
+    logger.info("Success checking password")
     for attributes in mydata:
         if email == attributes['email']:
             return attributes['password']
@@ -66,7 +68,9 @@ def get_user_by_id(user_id, data_table=table_data):
     """Get user data by id. Used in logedUser blueprint for getting user data by id. Essential for user_loader
     function."""
     myquery = {"id": user_id}
+    logger.info("Getting user data from mongoDB.")
     mydata = data_table.find(myquery)  # data type is mongodb cursor.
+    logger.info("Success getting user data from mongoDB.")
     for attributes in mydata:
         return attributes
 
@@ -75,7 +79,9 @@ def get_user_data_by_mail(email, data_table=table_data):
     """Get user dta by email. Used in login function in app.py for getting data of login user by email and store
     session data."""
     myquery = {"email": email}
+    logger.info("Getting user data from mongoDB.")
     mydata = data_table.find(myquery)  # data type is mongodb cursor.
+    logger.info("Success getting user data from mongoDB.")
     for attributes in mydata:
         return attributes
 
