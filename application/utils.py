@@ -11,24 +11,36 @@ HEADERS = {
 }
 
 
-def data_send(user_id: str, data: str):
-    # Define the data to be sent
-    data_item = {
-        "id": user_id,
-        "data": data
-    }
+# def data_send(user_id: str, data: str):
+#     # Define the data to be sent
+#     data_item = {
+#         "id": user_id,
+#         "data": data
+#     }
+#
+#     # Send the POST request
+#     response = requests.post(DATA_URL, json=data_item, headers=HEADERS)
+#
+#     # Check the response
+#     if response.status_code == 200:
+#         print("Data sent successfully!")
+#         return response.json()
+#     else:
+#         print("Failed to send data.")
+#         print("Status code:", response.status_code)
+#         print("Response:", response.text)
 
-    # Send the POST request
-    response = requests.post(DATA_URL, json=data_item, headers=HEADERS)
 
-    # Check the response
-    if response.status_code == 200:
-        print("Data sent successfully!")
+def data_send(user_id, data):
+    try:
+        #response = requests.post(DATA_URL, json={"user_id": user_id, "data": data}, headers=HEADERS)
+        response = requests.post('http://127.0.0.1:5000/data', json={"user_id": user_id, "data": data}, headers=HEADERS)
+
+        response.raise_for_status()
         return response.json()
-    else:
-        print("Failed to send data.")
-        print("Status code:", response.status_code)
-        print("Response:", response.text)
+    except requests.exceptions.RequestException as e:
+        print(f"Error sending data: {e}")
+        raise
 
 
 def inference(user_id: str, prompt: str):
