@@ -20,11 +20,13 @@ def add_data_or_usr(user_id: str, data):
 
 
 def produce_prompt_inference(user_id: str, prompt: str):
-    srh_r = query_collection(user_id=user_id, prompt=prompt)
-    search = ""
-    n = len(srh_r)
-    for i in range(n):
-        search += (srh_r[i].metadata['document'])
+    # srh_r = query_collection(user_id=user_id, prompt=prompt)
+    # search = ""
+    # n = len(srh_r)
+    # for i in range(n):
+    #     search += (srh_r[i].metadata['document'])
+
+    search = "Hey this is kidney! Anything in mind?"
 
     # Provide inference.
     inf = inference(search, prompt)

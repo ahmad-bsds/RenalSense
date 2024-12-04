@@ -198,6 +198,8 @@ def submit():
         "Extracted Texts": []
     }
 
+    print("User Response...........................", response)
+
     # Save uploaded files and extract text
     extracted_texts = []
     for file in files:

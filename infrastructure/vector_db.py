@@ -1,5 +1,5 @@
 # import fastembed
-from qdrant_client import QdrantClient, models
+from pinecone import Pinecone
 import os
 from project_utils import get_logger, load_env_variable
 
@@ -8,35 +8,42 @@ logger = get_logger(__name__)
 
 # Access the API key
 # qd_api_key = os.getenv('QDRANT_API_KEY')
-qd_api_key = load_env_variable("QDRANT_API_KEY", "../.env")#sample api key, will be removed.
+pc_api_key = load_env_variable("PINECONE_API_KEY", "../.env")#sample api key, will be removed.
 
 # Initiating qdrant client.
-qdrant_client = QdrantClient(
-    url=load_env_variable("QDRANT_URL", "../.env"),
-    api_key=qd_api_key,
-)
+pinecone_client = Pinecone(api_key=pc_api_key)
 
-if qdrant_client:
-    logger.info(f"Qdrant initiated! {qdrant_client}")
+if pinecone_client:
+    logger.info(f"Qdrant initiated! {pinecone_client}")
 else:
     logger.info("Qdrant initiating failed.")
 
 
+
+# TODO: add an api key in embeddings.py file.
+# TODO: Use any technique to get data in app.py in json formate
+
+
 def add_collection_data(user_id: str, docs, ids, metadata=None):
     """Collection to add new data into the collection by user id against related collection."""
+    index = pinecone_client.Index(name=user_id)
+
     logger.info("Adding data into vector DB...")
-    return qdrant_client.add(
+
+    qdrant_client.add(
         collection_name=user_id,
         documents=docs,
         metadata=metadata,
         ids=ids
     )
+    logger.info("Data added successfully into vector database!")
 
 
 def delete_collection(user_id: str):
     """Function to delete the collection in case user delete his/her account"""
     logger.info(f"Deleting qdrant collection {user_id}")
-    return qdrant_client.delete_collection(collection_name=f"{user_id}")
+    qdrant_client.delete_collection(collection_name=f"{user_id}")
+    logger.info(f"Collection {user_id} deleted successfully!")
 
 
 def query_collection(user_id, prompt):
