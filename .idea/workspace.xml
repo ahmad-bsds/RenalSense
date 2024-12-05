@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration.">
+    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="bug fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/user_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/user_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inference/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/playground.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/playground.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/vector_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/vector_db.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,22 +202,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1721804197307</updated>
-    </task>
-    <task id="LOCAL-00011" summary="embeddings added, enhanced other things.">
-      <option name="closed" value="true" />
-      <created>1722407228171</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1722407228171</updated>
-    </task>
-    <task id="LOCAL-00012" summary="embeddings added, enhanced other things.">
-      <option name="closed" value="true" />
-      <created>1722408398403</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1722408398403</updated>
     </task>
     <task id="LOCAL-00013" summary="updated embedings and query with fastembed">
       <option name="closed" value="true" />
@@ -595,7 +579,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733423215522</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="AI">
+      <option name="closed" value="true" />
+      <created>1733423984725</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1733423984725</updated>
+    </task>
+    <task id="LOCAL-00061" summary="bug fix">
+      <option name="closed" value="true" />
+      <created>1733424247378</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1733424247378</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -629,6 +629,8 @@
     <MESSAGE value="changed name from apis to app" />
     <MESSAGE value="Combined flask and fast api." />
     <MESSAGE value="updated files and enhanced integration." />
-    <option name="LAST_COMMIT_MESSAGE" value="updated files and enhanced integration." />
+    <MESSAGE value="AI" />
+    <MESSAGE value="bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fix" />
   </component>
 </project>

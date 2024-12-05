@@ -108,6 +108,7 @@ def query_collection(user_id, prompt):
     try:
         return response["matches"][0]["metadata"]
     except Exception as e:
+        print("Response error:", response)
         logger.error("Error while querying data in vector database.", e)
         return "Sorry! I could not process your request. Please try again later."
 
