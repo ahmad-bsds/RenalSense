@@ -36,7 +36,7 @@ def read_json_file(file_path):
 
 processed_data = []
 
-def add_collection_data(metadata, id: str): # file: str= "./data.json"
+def add_collection_data(metadata, user_id: str): # file: str= "./data.json"
     """Function will load data and process this data to store in a list. List will be stored in
         the vector database.
     """
@@ -49,18 +49,19 @@ def add_collection_data(metadata, id: str): # file: str= "./data.json"
 
     # insert processed data in the list.
     logger.info("Inserting data in the list!")
+
     processed_data.append(
         {
             "values": embeddings,
-            "id": "",
+            "id": "0",
             "metadata": metadata
         }
     )
     logger.info("Data inserted in the list!")
 
     logger.info("Inserting data in the vector db!")
-    collection_index = pinecone_client.Index(id)
-    collection_index.upsert(collection_name=metadata['user_id'], vectors=processed_data)
+    collection_index = pinecone_client.Index("renal-sense")
+    collection_index.upsert(vectors=processed_data, namespace=str(user_id))
     logger.info("Data inserted in the vector db!")
 
 
@@ -73,17 +74,37 @@ def delete_collection(user_id: str):
 
 
 def query_collection(user_id, prompt):
-    logger.info(f"Querying from {user_id}.......")
-    query =  pinecone_client.query(
-        collection_name=user_id,
-        query_text=prompt,
-        limit=10
-    )
-    if query:
-        logger.info(f"Data query successful!")
-    else:
-        logger.info("Data query un-successful!")
+    # logger.info(f"Querying from {user_id}.......")
+    # query =  pinecone_client.query(
+    #     collection_name=user_id,
+    #     query_text=prompt,
+    #     limit=10
+    # )
+    # if query:
+    #     logger.info(f"Data query successful!")
+    # else:
+    #     logger.info("Data query un-successful!")
+    #
+    # return query
 
-    return query
+    logger.info(f"Querying from {user_id}.......")
+    collection_index = pinecone_client.Index("renal-sense")
+    logger.info(f"Collection {user_id} initiated!")
+
+    logger.info(f"Embeddings generating!")
+    vector = embed(prompt)
+    logger.info(f"Embeddings generated!")
+
+    logger.info(f"Querying from {user_id}.......")
+    response = collection_index.query(
+        namespace=str(user_id),
+        vector=vector,
+        top_k=2,
+        include_values=True,
+        include_metadata=True,
+    )
+    logger.info(f"Data query successful!")
+
+    return response["matches"][0]["metadata"]
 
 # ------------

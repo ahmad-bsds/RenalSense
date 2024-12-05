@@ -73,15 +73,11 @@ def health_updates(user_id):
 
     def similarity_data_() -> json:
         """Function to retrieve relevant health Data."""
-        logger.info("""Retrieving Data from qdrant...""")
+        logger.info("""Retrieving Data from pinecone...""")
         srh_r = query_collection(user_id=user_id, prompt=prompt)
         logger.info(f"Data query successful for health updates. {srh_r}")
         if srh_r:
-            search = ""
-            n = len(srh_r)
-            for i in range(n):
-                search += (srh_r[i].metadata['document'])
-            return str(search)
+            return srh_r
         else:
             logger.error(f"Qdrant Data Querying failed for health updates. {srh_r}")
             return {
