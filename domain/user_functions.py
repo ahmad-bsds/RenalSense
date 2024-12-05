@@ -21,7 +21,7 @@ def produce_prompt_inference(user_id: str, prompt: str):
     # for i in range(n):
     #     search += (srh_r[i].metadata['document'])
 
-    search = "Hey this is kidney! Anything in mind?"
+    search = query_collection(user_id=user_id, prompt=prompt)
 
     # Provide inference.
     inf = inference(search, prompt)

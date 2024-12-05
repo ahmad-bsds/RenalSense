@@ -1,7 +1,7 @@
 import json
 import openai
 from langchain.prompts import ChatPromptTemplate
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
 from dotenv import load_dotenv
 import os
@@ -32,7 +32,7 @@ chat = ChatOpenAI(
 )
 
 template_string = """Lets you are a kidney doctor and provide me answer of {prompt} from \
-{Data}. The answer must be simple, to the point, concise and true.
+{data}. The answer must be simple, to the point, concise and true.
 """
 
 # Defining template.
@@ -50,6 +50,7 @@ def inference(similarity_data, user_prompt):
     logger.info("Response created for inference.")
 
     return response.content
+
 
 
 prompt_template = ChatPromptTemplate.from_template(
