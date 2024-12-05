@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/embedings.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/embedings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/user_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/user_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/vector_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/vector_db.py" afterDir="false" />
-    </list>
+    <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -203,14 +198,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1721804197307</updated>
-    </task>
-    <task id="LOCAL-00008" summary="embeddings added, enhanced other things.">
-      <option name="closed" value="true" />
-      <created>1722405928685</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1722405928685</updated>
     </task>
     <task id="LOCAL-00009" summary="embeddings added, enhanced other things.">
       <option name="closed" value="true" />
@@ -596,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733412642279</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="updated files and enhanced integration.">
+      <option name="closed" value="true" />
+      <created>1733418959864</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1733418959864</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="UnknownFeatures">
