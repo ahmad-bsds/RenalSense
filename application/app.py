@@ -62,8 +62,6 @@ def user_home():
         raise logger.error("Recommendation and updates failed!", e)
     # Check if 'recommendations' is not a list
 
-    print("Data.............", data)
-
     if not isinstance(data['recommendations'], list):
         # Convert it to a list
         data['recommendations'] = [data['recommendations']]
