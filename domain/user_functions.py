@@ -11,7 +11,7 @@ def add_data_or_usr(data, user_id):
     # create_collection(user_id=user_id)
 
     # Storing Data into qdrant.
-    add_collection_data(metadata=data)
+    add_collection_data(metadata=data, id=user_id)
 
 
 def produce_prompt_inference(user_id: str, prompt: str):

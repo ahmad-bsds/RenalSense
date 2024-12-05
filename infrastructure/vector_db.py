@@ -1,5 +1,6 @@
 # import fastembed
 from pinecone import Pinecone
+from domain.embedings import embed
 import os
 from project_utils import get_logger, load_env_variable
 import json
@@ -35,16 +36,19 @@ def read_json_file(file_path):
 
 processed_data = []
 
-def add_collection_data(metadata): # file: str= "./data.json"
+def add_collection_data(metadata, id: str): # file: str= "./data.json"
     """Function will load data and process this data to store in a list. List will be stored in
         the vector database.
     """
-    # Loading data.
-    # metadata = read_json_file(file_path="../Data/response.json")
+    try:
+        logger.info("Embeddings generating!")
+        embeddings = embed(metadata)
+        logger.info("Embeddings generated!")
+    except Exception as e:
+        raise logger.error(e)
 
-    # Iterating on data.
-    embeddings = [13,4,4,55,6,5,66,564]
     # insert processed data in the list.
+    logger.info("Inserting data in the list!")
     processed_data.append(
         {
             "values": embeddings,
@@ -52,22 +56,13 @@ def add_collection_data(metadata): # file: str= "./data.json"
             "metadata": metadata
         }
     )
+    logger.info("Data inserted in the list!")
 
-print("Processed data.................", processed_data)
+    logger.info("Inserting data in the vector db!")
+    collection_index = pinecone_client.Index(id)
+    collection_index.upsert(collection_name=metadata['user_id'], vectors=processed_data)
+    logger.info("Data inserted in the vector db!")
 
-# def add_collection_data(user_id: str, docs, ids, metadata=None):
-#     """Collection to add new Data into the collection by user id against related collection."""
-#     index = pinecone_client.Index(name=user_id)
-#
-#     logger.info("Adding Data into vector DB...")
-#
-#     pinecone_client.add(
-#         collection_name=user_id,
-#         documents=docs,
-#         metadata=metadata,
-#         ids=ids
-#     )
-#     logger.info("Data added successfully into vector database!")
 
 
 def delete_collection(user_id: str):
