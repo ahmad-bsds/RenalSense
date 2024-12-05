@@ -30,7 +30,7 @@ def add_collection_data(user_id: str, docs, ids, metadata=None):
 
     logger.info("Adding data into vector DB...")
 
-    qdrant_client.add(
+    pinecone_client.add(
         collection_name=user_id,
         documents=docs,
         metadata=metadata,
@@ -42,13 +42,13 @@ def add_collection_data(user_id: str, docs, ids, metadata=None):
 def delete_collection(user_id: str):
     """Function to delete the collection in case user delete his/her account"""
     logger.info(f"Deleting qdrant collection {user_id}")
-    qdrant_client.delete_collection(collection_name=f"{user_id}")
+    pinecone_client.delete_collection(f"{user_id}")
     logger.info(f"Collection {user_id} deleted successfully!")
 
 
 def query_collection(user_id, prompt):
     logger.info(f"Querying from {user_id}.......")
-    query =  qdrant_client.query(
+    query =  pinecone_client.query(
         collection_name=user_id,
         query_text=prompt,
         limit=10

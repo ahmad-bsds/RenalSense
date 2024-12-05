@@ -50,13 +50,7 @@ file_flag = None
 
 
 # User dashboard where insights will be shown.
-# @flask_app.route('/')
-# def home():
-#     return "Hello, Flask!"
-@flask_app.route('/')
-def home():
-    return render_template('homepage.html')
-
+@flask_app.route('/user_home')
 @login_required
 def user_home():
     # # Get the data.
@@ -294,9 +288,9 @@ def login():
     return render_template('login.html', form=form)
 
 
-# @flask_app.route("/")
-# def home():
-#     return render_template('homepage.html')
+@flask_app.route('/')
+def home():
+    return render_template('homepage.html')
 
 
 if __name__ == "__main__":
