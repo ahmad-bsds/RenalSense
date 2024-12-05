@@ -31,7 +31,7 @@ class DataItem(BaseModel):
 @fast_app.post("/Data")
 async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
     logger.info(f"User {item.id} is getting in........")
-    add_data_or_usr(user_id=item.id, data=item.data)
+    add_data_or_usr(user_id=item.id, data=item.data) # id is user id and data is json file.
     return "Data sent successful!"
 
 

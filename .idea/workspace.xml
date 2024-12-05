@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b03bbf18-d265-4246-bcb2-3962d5806d3c" name="Changes" comment="updated files and enhanced integration.">
+      <change afterPath="$PROJECT_DIR$/application/playground.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pythonProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/response.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/embedings.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/embedings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/user_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/user_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/vector_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/vector_db.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,6 +74,7 @@
     &quot;Python.embedings.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.mongo_db.executor&quot;: &quot;Run&quot;,
+    &quot;Python.playground.executor&quot;: &quot;Run&quot;,
     &quot;Python.retrieval.executor&quot;: &quot;Run&quot;,
     &quot;Python.test.executor&quot;: &quot;Run&quot;,
     &quot;Python.user_functions.executor&quot;: &quot;Run&quot;,
@@ -201,14 +209,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1721804197307</updated>
-    </task>
-    <task id="LOCAL-00006" summary="embeddings added, enhanced other things.">
-      <option name="closed" value="true" />
-      <created>1722401031492</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1722401031492</updated>
     </task>
     <task id="LOCAL-00007" summary="embeddings added, enhanced other things.">
       <option name="closed" value="true" />
@@ -594,7 +594,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733399664090</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="updated files and enhanced integration.">
+      <option name="closed" value="true" />
+      <created>1733400514366</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1733400514366</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="UnknownFeatures">

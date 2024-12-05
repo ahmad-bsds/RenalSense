@@ -3,20 +3,15 @@ from domain.document_chunks import chunk_text
 from inference.bot import inference
 
 
-def add_data_or_usr(user_id: str, data):
+def add_data_or_usr(data, user_id):
     """
     This function will add the user if not available in the vector database against his/her user id.
     """
     # Adding user in vector db.
     # create_collection(user_id=user_id)
 
-    # Chunking the Data.
-    chunks = chunk_text(data)
-
-    ids = list(range(len(chunks)))
-
     # Storing Data into qdrant.
-    add_collection_data(user_id=user_id, ids=ids, docs=chunks)
+    add_collection_data(metadata=data)
 
 
 def produce_prompt_inference(user_id: str, prompt: str):

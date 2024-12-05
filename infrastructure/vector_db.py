@@ -2,7 +2,7 @@
 from pinecone import Pinecone
 import os
 from project_utils import get_logger, load_env_variable
-
+import json
 
 logger = get_logger(__name__)
 
@@ -19,24 +19,55 @@ else:
     logger.info("Qdrant initiating failed.")
 
 
+def read_json_file(file_path):
+  """Reads a JSON file and returns its contents as a Python object.
 
-# TODO: add an api key in embeddings.py file.
-# TODO: Use any technique to get Data in app.py in json formate
+  Args:
+    file_path: The path to the JSON file.
 
+  Returns:
+    The contents of the JSON file as a Python object (typically a dictionary or list).
+  """
 
-def add_collection_data(user_id: str, docs, ids, metadata=None):
-    """Collection to add new Data into the collection by user id against related collection."""
-    index = pinecone_client.Index(name=user_id)
+  with open(file_path, 'r') as f:
+    data = json.load(f)
+  return data
 
-    logger.info("Adding Data into vector DB...")
+processed_data = []
 
-    pinecone_client.add(
-        collection_name=user_id,
-        documents=docs,
-        metadata=metadata,
-        ids=ids
+def add_collection_data(metadata): # file: str= "./data.json"
+    """Function will load data and process this data to store in a list. List will be stored in
+        the vector database.
+    """
+    # Loading data.
+    # metadata = read_json_file(file_path="../Data/response.json")
+
+    # Iterating on data.
+    embeddings = [13,4,4,55,6,5,66,564]
+    # insert processed data in the list.
+    processed_data.append(
+        {
+            "values": embeddings,
+            "id": "",
+            "metadata": metadata
+        }
     )
-    logger.info("Data added successfully into vector database!")
+
+print("Processed data.................", processed_data)
+
+# def add_collection_data(user_id: str, docs, ids, metadata=None):
+#     """Collection to add new Data into the collection by user id against related collection."""
+#     index = pinecone_client.Index(name=user_id)
+#
+#     logger.info("Adding Data into vector DB...")
+#
+#     pinecone_client.add(
+#         collection_name=user_id,
+#         documents=docs,
+#         metadata=metadata,
+#         ids=ids
+#     )
+#     logger.info("Data added successfully into vector database!")
 
 
 def delete_collection(user_id: str):

@@ -1,19 +1,12 @@
-# import google.generativeai as genai
-# import os
-#
-# os.environ['API_KEY'] ="AIzaSyAnieJXGl4LwvnmD1WCCZz8eOBAtthX39I"
-# genai.configure(api_key=os.environ["API_KEY"])
-#
-# # Function to embed incoming text.
-# def embed(content):
-#     return genai.embed_content(
-#         model="models/text-embedding-004",
-#         task_type="RETRIEVAL_DOCUMENT",
-#         content = content)
+import os
+from together import Together
+from project_utils import load_env_variable
 
-# from langchain_google_vertexai import VertexAIEmbeddings
-#
-# embeddings = VertexAIEmbeddings(model="text-embedding-004")
-# # embeddings.embed_query("Hello, world!")
-# print(embeddings.embed_query("Hello, world!"))
+client = Together(api_key=load_env_variable("TOGETHER_API_KEY", "../.env"))
 
+response = client.embeddings.create(
+  model = "togethercomputer/m2-bert-80M-8k-retrieval",
+  input = "Our solar system orbits the Milky Way galaxy at about 515,000 mph"
+)
+
+print(response)
