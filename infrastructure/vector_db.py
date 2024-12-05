@@ -21,14 +21,14 @@ else:
 
 
 # TODO: add an api key in embeddings.py file.
-# TODO: Use any technique to get data in app.py in json formate
+# TODO: Use any technique to get Data in app.py in json formate
 
 
 def add_collection_data(user_id: str, docs, ids, metadata=None):
-    """Collection to add new data into the collection by user id against related collection."""
+    """Collection to add new Data into the collection by user id against related collection."""
     index = pinecone_client.Index(name=user_id)
 
-    logger.info("Adding data into vector DB...")
+    logger.info("Adding Data into vector DB...")
 
     pinecone_client.add(
         collection_name=user_id,

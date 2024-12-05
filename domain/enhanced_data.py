@@ -22,17 +22,17 @@ chat = ChatOpenAI(
 )
 
 template_string = """
-Your task is to generate value-able insights from {data}.\
+Your task is to generate value-able insights from {Data}.\
 Here are some of output requirements:
 -Be act like a special doctor with valuable experience and casual research experience.
 -Generate insights in summary form.
 -Be simple and concise
 -Research well before explaining and generating insights.
 -Don't write irrelevant.
--Write in a way that data needs to be embed and search latter so keep the formate accordingly.
+-Write in a way that Data needs to be embed and search latter so keep the formate accordingly.
 -Don't use personal info such as: "name, medical record number, date of report however use age for logical research and\
 insights building."
-- If the data in json extract relevant insight based on available data.
+- If the Data in json extract relevant insight based on available Data.
 """
 
 # Defining template.

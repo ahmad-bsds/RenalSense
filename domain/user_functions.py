@@ -10,12 +10,12 @@ def add_data_or_usr(user_id: str, data):
     # Adding user in vector db.
     # create_collection(user_id=user_id)
 
-    # Chunking the data.
+    # Chunking the Data.
     chunks = chunk_text(data)
 
     ids = list(range(len(chunks)))
 
-    # Storing data into qdrant.
+    # Storing Data into qdrant.
     add_collection_data(user_id=user_id, ids=ids, docs=chunks)
 
 

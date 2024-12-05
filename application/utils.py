@@ -12,10 +12,10 @@ HEADERS = {
 
 
 def data_send(user_id: str, data: str):
-    # Define the data to be sent
+    # Define the Data to be sent
     data_item = {
         "id": user_id,
-        "data": data
+        "Data": data
     }
 
     # Send the POST request
@@ -26,7 +26,7 @@ def data_send(user_id: str, data: str):
         print("Data sent successfully!")
         return response.json()
     else:
-        print("Failed to send data.")
+        print("Failed to send Data.")
         print("Status code:", response.status_code)
         print("Response:", response.text)
 

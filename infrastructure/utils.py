@@ -23,9 +23,9 @@ def matchHash(hashedPass, string):
 
 
 """"
-When user need to log in its data should be stored that this user have active login session.
-That is why this is a login blueprint different from flask form for storing user data and give data by id.
-It uses a function from user_database from getting data from mongodb.
+When user need to log in its Data should be stored that this user have active login session.
+That is why this is a login blueprint different from flask form for storing user Data and give Data by id.
+It uses a function from user_database from getting Data from mongodb.
 """
 
 
@@ -40,7 +40,7 @@ class User(UserMixin):
 
     @staticmethod
     def get(user_id):
-        user_data = get_user_by_id(user_id)  # function to get data by id defined in user_database.
+        user_data = get_user_by_id(user_id)  # function to get Data by id defined in user_database.
         if user_data:
             return User(user_data['id'], user_data['name'], user_data['email'], user_data['password'])
         return None

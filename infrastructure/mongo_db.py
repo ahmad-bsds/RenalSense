@@ -39,8 +39,8 @@ except Exception as e:
 
 
 def add_data(user_id, name, email, password, data_table=table_data):
-    """Used to add data user that will newly be added."""
-    logger.info("Adding data to database")
+    """Used to add Data user that will newly be added."""
+    logger.info("Adding Data to database")
     user_data = {
         "id": user_id,
         "name": name,
@@ -48,14 +48,14 @@ def add_data(user_id, name, email, password, data_table=table_data):
         "password": password
     }
     data_table.insert_one(user_data)
-    logger.info("Success adding data to database")
+    logger.info("Success adding Data to database")
 
 
 def chk_pass(email, data_table=table_data):
     """Function to match email in database and if matched then return password accordingly."""
     myquery = {"email": email}
     logger.info("Checking password")
-    mydata = data_table.find(myquery)  # data type is mongodb cursor.
+    mydata = data_table.find(myquery)  # Data type is mongodb cursor.
     logger.info("Success checking password")
     for attributes in mydata:
         if email == attributes['email']:
@@ -65,23 +65,23 @@ def chk_pass(email, data_table=table_data):
 
 
 def get_user_by_id(user_id, data_table=table_data):
-    """Get user data by id. Used in logedUser blueprint for getting user data by id. Essential for user_loader
+    """Get user Data by id. Used in logedUser blueprint for getting user Data by id. Essential for user_loader
     function."""
     myquery = {"id": user_id}
-    logger.info("Getting user data from mongoDB.")
-    mydata = data_table.find(myquery)  # data type is mongodb cursor.
-    logger.info("Success getting user data from mongoDB.")
+    logger.info("Getting user Data from mongoDB.")
+    mydata = data_table.find(myquery)  # Data type is mongodb cursor.
+    logger.info("Success getting user Data from mongoDB.")
     for attributes in mydata:
         return attributes
 
 
 def get_user_data_by_mail(email, data_table=table_data):
-    """Get user dta by email. Used in login function in app.py for getting data of login user by email and store
-    session data."""
+    """Get user dta by email. Used in login function in app.py for getting Data of login user by email and store
+    session Data."""
     myquery = {"email": email}
-    logger.info("Getting user data from mongoDB.")
-    mydata = data_table.find(myquery)  # data type is mongodb cursor.
-    logger.info("Success getting user data from mongoDB.")
+    logger.info("Getting user Data from mongoDB.")
+    mydata = data_table.find(myquery)  # Data type is mongodb cursor.
+    logger.info("Success getting user Data from mongoDB.")
     for attributes in mydata:
         return attributes
 

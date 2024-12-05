@@ -27,8 +27,8 @@ class DataItem(BaseModel):
     data: str
 
 
-# API for handling users and their data.
-@fast_app.post("/data")
+# API for handling users and their Data.
+@fast_app.post("/Data")
 async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
     logger.info(f"User {item.id} is getting in........")
     add_data_or_usr(user_id=item.id, data=item.data)

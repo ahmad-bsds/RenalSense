@@ -22,7 +22,7 @@ login_manager = LoginManager()
 login_manager.init_app(flask_app)
 
 # ================== User dashboard management ====================
-# Sample data
+# Sample Data
 #
 recommendations = [
     {
@@ -53,18 +53,18 @@ file_flag = None
 @flask_app.route('/user_home')
 @login_required
 def user_home():
-    # # Get the data.
+    # # Get the Data.
   #  logger.info(f"User {current_user.id} is getting in........")
-    # data = {}
+    # Data = {}
     # try:
-    #     data = update(str(current_user.id))
+    #     Data = update(str(current_user.id))
     #     logger.info("Data fetched!")
     # except:
     #    logger.error("Recommendation and updates failed!")
     # # Check if 'recommendations' is not a list
-    # if not isinstance(data['recommendations'], list):
+    # if not isinstance(Data['recommendations'], list):
     #     # Convert it to a list
-    #     data['recommendations'] = [data['recommendations']]
+    #     Data['recommendations'] = [Data['recommendations']]
     return render_template('user_home.html', health_stats= health_stats, recommendations= recommendations)
    # return render_template('user_home.html', health_stats=health_stats, recommendations=recommendations)
 
@@ -168,7 +168,7 @@ def submit():
     comment = request.form.get('comment')
     files = request.files.getlist('file-upload')
 
-    # Process the data as needed
+    # Process the Data as needed
     response = {
 
         "Age": age,
@@ -210,11 +210,11 @@ def submit():
 
     # Add extracted texts to the response
     response["Extracted Texts"] = extracted_texts
-    # Add submitted data.
-    output_file = "./Data/response.json"
+    # Add submitted Data.
+    output_file = "../Data/response.json"
     with open(output_file, "w") as file:
         json.dump(response, file, indent=4)
-    # data_send(user_id=str(current_user.id), data=str(response))
+    # data_send(user_id=str(current_user.id), Data=str(response))
     logger.info(f"Data added by {current_user.id}")
     # Redirect to a success page or perform other actions
     return redirect("user_home")
@@ -269,8 +269,8 @@ def login():
     """Login of user."""
     HASHPASS = ''
     form = LoginForm()  # object of form for login.
-    if request.method == 'POST':  # if we are sending data to server e.g filling fields.
-        # get data we entered in the fields
+    if request.method == 'POST':  # if we are sending Data to server e.g filling fields.
+        # get Data we entered in the fields
         email = request.form.get('email')
         password = request.form.get('password')
         if not chk_pass(email):  # if mail doesnt exists in database.
@@ -280,7 +280,7 @@ def login():
         if matchHash(HASHPASS, password):  # match hashed (hash_pass) and user entered pass.
             # For storing session of user who logged in.
             user_data = get_user_data_by_mail(email=email)
-            # storing data in blueprint of logged_user.
+            # storing Data in blueprint of logged_user.
             user = User(user_data['id'], user_data['name'], user_data['email'], user_data['password'])
             # flask_login method to store session of logging.
             login_user(user)

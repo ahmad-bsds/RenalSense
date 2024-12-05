@@ -32,7 +32,7 @@ chat = ChatOpenAI(
 )
 
 template_string = """Lets you are a kidney doctor and provide me answer of {prompt} from \
-{data}. The answer must be simple, to the point, concise and true.
+{Data}. The answer must be simple, to the point, concise and true.
 """
 
 # Defining template.
@@ -54,12 +54,12 @@ def inference(similarity_data, user_prompt):
 
 prompt_template = ChatPromptTemplate.from_template(
 """
-Your task is to understand this {data} and provide me kidney health insights and recommendations.\
+Your task is to understand this {Data} and provide me kidney health insights and recommendations.\
 Requirements:
 - Answer must be a complete Json formate, with aggregated keys int(stage(0-5)), str(risk(High-Medium-Low-No)) and recommendations.
 - Ensure that Json output is complete and well formatted.
 - Act like a kidney doctor.
-- Answer after a huge research, medical inference and understanding logic of data and potential things.
+- Answer after a huge research, medical inference and understanding logic of Data and potential things.
 - Be concise, be true.
 - Do not Hallucinate.
 - Don't make any hypothetical answer, give genuine answers.
@@ -69,11 +69,11 @@ Requirements:
 
 def health_updates(user_id):
     """This function will produce the condition of kidney health and related recommendations."""
-    prompt = "My health data"
+    prompt = "My health Data"
 
     def similarity_data_() -> json:
-        """Function to retrieve relevant health data."""
-        logger.info("""Retrieving data from qdrant...""")
+        """Function to retrieve relevant health Data."""
+        logger.info("""Retrieving Data from qdrant...""")
         srh_r = query_collection(user_id=user_id, prompt=prompt)
         logger.info(f"Data query successful for health updates. {srh_r}")
         if srh_r:
@@ -92,7 +92,7 @@ def health_updates(user_id):
 
 
     chain = prompt_template | chat
-    response = chain.invoke({"data": similarity_data_()}).content
+    response = chain.invoke({"Data": similarity_data_()}).content
     # logger.info("Response successful for health updates.")
 
     # Your malformed JSON string
