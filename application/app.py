@@ -211,7 +211,10 @@ def submit():
     # Add extracted texts to the response
     response["Extracted Texts"] = extracted_texts
     # Add submitted data.
-    data_send(user_id=str(current_user.id), data=str(response))
+    output_file = "./Data/response.json"
+    with open(output_file, "w") as file:
+        json.dump(response, file, indent=4)
+    # data_send(user_id=str(current_user.id), data=str(response))
     logger.info(f"Data added by {current_user.id}")
     # Redirect to a success page or perform other actions
     return redirect("user_home")

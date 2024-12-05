@@ -11,9 +11,9 @@
 #         task_type="RETRIEVAL_DOCUMENT",
 #         content = content)
 
-from langchain_google_vertexai import VertexAIEmbeddings
-
-embeddings = VertexAIEmbeddings(model="text-embedding-004")
-# embeddings.embed_query("Hello, world!")
-print(embeddings.embed_query("Hello, world!"))
+# from langchain_google_vertexai import VertexAIEmbeddings
+#
+# embeddings = VertexAIEmbeddings(model="text-embedding-004")
+# # embeddings.embed_query("Hello, world!")
+# print(embeddings.embed_query("Hello, world!"))
 
