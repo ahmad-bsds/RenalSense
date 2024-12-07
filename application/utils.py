@@ -4,9 +4,9 @@ from project_utils import get_logger
 
 logger = get_logger(__name__)
 
-DATA_URL = "http://127.0.0.1:8000/Data"
-INFERENCE_URL = "http://127.0.0.1:8000/inference/{user_id}"
-UPDATE_URL = "http://127.0.0.1:8000/health_updates/{user_id}"
+DATA_URL = "https://renalsense.onrender.com/Data"
+INFERENCE_URL = "https://renalsense.onrender.com/inference/{user_id}"
+UPDATE_URL = "https://renalsense.onrender.com/health_updates/{user_id}"
 # Set the headers including the API key
 HEADERS = {
     "Content-Type": "application/json",
