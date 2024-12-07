@@ -24,7 +24,7 @@ async def get_api_key(api_key_headers: str = Security(api_key_header)):
 
 class DataItem(BaseModel):
     id: str
-    data: str
+    data: dict
 
 
 @fast_app.get("/")

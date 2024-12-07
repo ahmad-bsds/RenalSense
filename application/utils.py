@@ -1,7 +1,7 @@
 import requests
 import logging
 
-DATA_URL = "http://127.0.0.1:8000/data"
+DATA_URL = "http://127.0.0.1:8000/Data"
 INFERENCE_URL = "http://127.0.0.1:8000/inference/{user_id}"
 UPDATE_URL = "http://127.0.0.1:8000/health_updates/{user_id}"
 # Set the headers including the API key
@@ -11,13 +11,14 @@ HEADERS = {
 }
 
 
-def data_send(user_id: str, data: str):
+def data_send(user_id: str, data: dict):
     # Define the Data to be sent
     data_item = {
         "id": user_id,
-        "Data": data
+        "data": data
     }
 
+    print(data_item)
 
     # Send the POST request
     response = requests.post(DATA_URL, json=data_item, headers=HEADERS)
@@ -30,6 +31,7 @@ def data_send(user_id: str, data: str):
         print("Failed to send Data.")
         print("Status code:", response.status_code)
         print("Response:", response.text)
+
 
 
 def inference(user_id: str, prompt: str):
@@ -52,6 +54,7 @@ def inference(user_id: str, prompt: str):
         print("Failed to retrieve inference.")
         print("Status code:", response.status_code)
         print("Response:", response.text)
+
 
 
 def update(user_id: str):
