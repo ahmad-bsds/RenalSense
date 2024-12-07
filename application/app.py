@@ -55,13 +55,14 @@ file_flag = None
 def user_home():
     # # Get the Data.
     logger.info(f"User {current_user.id} is getting in........")
-    try:
-        data = update(str(current_user.id))
-        logger.info("Data fetched!")
-    except Exception as e:
-        raise logger.error("Recommendation and updates failed!", e)
-    # Check if 'recommendations' is not a list
+    # try:
+    #     data = update(str(current_user.id))
+    #     logger.info("Data fetched!")
+    # except Exception as e:
+    #     logger.error("Recommendation and updates failed!", e)
 
+    data = {'stage': 0, 'risk': 'Error', 'recommendations': ['Maintain a healthy diet', 'Stay hydrated', 'Exercise regularly', 'Get regular check-ups']}
+    # Check if 'recommendations' is not a list
     if not isinstance(data['recommendations'], list):
         # Convert it to a list
         data['recommendations'] = [data['recommendations']]
@@ -83,12 +84,18 @@ def refresh():
     pass
 
 # User chat
-@flask_app.route('/chat', methods=['POST'])
+@flask_app.route('/chat', methods=['POST', 'GET'])
 @login_required
 def chat():
     user_message = request.form.get('message')
     print(f"User: {user_message}")
-    return jsonify({'response': inference(user_id=str(current_user.id), prompt=user_message)})
+    try:
+        logger.info(f"Generating inference for {current_user.id} ........")
+        inf = inference(user_id=str(current_user.id), prompt=user_message)
+        logger.info("Inference generated!")
+    except Exception as e:
+        raise logger.error("Chat failed!", e)
+    return jsonify({'response': inf})
 
 
 # when user upload something.
@@ -192,8 +199,6 @@ def submit():
         "Extracted Texts": []
     }
 
-    print("User Response...........................", response)
-
     # Save uploaded files and extract text
     extracted_texts = []
     for file in files:
@@ -211,15 +216,23 @@ def submit():
     # Add extracted texts to the response
     response["Extracted Texts"] = extracted_texts
 
+    try:
+        data = {key: f"{value}" for key, value in response.items()}
+        print("Data submitting...........................", data)
+    except Exception as e:
+        data = response
+        logger.error(f"TypeError, adding data: {e}")
+
     # Add submitted Data.
-    data_send(user_id=str(current_user.id), data=json.dumps(response))
+    try:
+        data_send(user_id=str(current_user.id), data=data)
+        logger.info(f"Data added by {current_user.id}")
+    except Exception as e:
+        logger.error(f"Error adding data: {e}")
 
-    # Redirect to a success page or perform other actions
 
-    logger.info(f"Data added by {current_user.id}")
     # Redirect to a success page or perform other actions
     return redirect("user_home")
-
 
 # ========================= User Management ==========================
 # Signup.
@@ -236,9 +249,7 @@ def signup():
         if not chk_pass(email):
             hashed = hashPass(password)
             add_data(user_id=user_id, name=name, email=email, password=str(hashed))
-            # Create a user in vector database.
-            data_send(user_id=str(user_id), data="")
-            logger.info(f"user {user_id} added")
+            logger.info(f"user {user_id} signed up.")
             return redirect('/app/settings')
         else:
             flash('Email already exists.')  # To show message.

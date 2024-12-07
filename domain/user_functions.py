@@ -1,7 +1,9 @@
 from infrastructure.vector_db import add_collection_data, query_collection
 from domain.document_chunks import chunk_text
 from inference.bot import inference
+from project_utils import get_logger
 
+logger = get_logger(__name__)
 
 def add_data_or_usr(data, user_id):
     """
@@ -20,11 +22,13 @@ def produce_prompt_inference(user_id: str, prompt: str):
     # n = len(srh_r)
     # for i in range(n):
     #     search += (srh_r[i].metadata['document'])
-
-    search = query_collection(user_id=user_id, prompt=prompt)
+    # try:
+    #     search = query_collection(user_id=user_id, prompt=prompt)
+    # except Exception as e:
+    #     raise logger.error("Qdrant Data Querying failed!", e)
 
     # Provide inference.
-    inf = inference(search, prompt)
+    inf = inference("I dont have anything.", prompt)
     return inf
 
 

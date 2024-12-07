@@ -36,7 +36,7 @@ def read_json_file(file_path):
 
 processed_data = []
 
-def add_collection_data(metadata, user_id: str): # file: str= "./data.json"
+def add_collection_data(metadata: dict , user_id: str): # file: str= "./data.json"
     """Function will load data and process this data to store in a list. List will be stored in
         the vector database.
     """
@@ -64,6 +64,17 @@ def add_collection_data(metadata, user_id: str): # file: str= "./data.json"
     collection_index.upsert(vectors=processed_data, namespace=str(user_id))
     logger.info("Data inserted in the vector db!")
 
+# add_collection_data(user_id="190837191936633328064035682300969825632",
+#                          metadata={'Age': '',
+#                           'Gender': 'Select Gender', 'Height': '',
+#                           'Fatigue': 'Select an option', 'Concentration': '',
+#                           'Sleep': '', 'Appetite': '', 'Cramping': '',
+#                           'Swollen Feet': '', 'Puffiness': '', 'Dry Skin': '',
+#                           'Urination': '', 'Nausea': '', 'Vomiting': '', 'Urine Output': '',
+#                           'Pericardium': '', 'Blood Pressure': "None", 'Comment': '',
+#                           'Extracted Texts': "[]"}
+#
+#                       )
 
 
 def delete_collection(user_id: str):
@@ -106,10 +117,12 @@ def query_collection(user_id, prompt):
     logger.info(f"Data query successful!")
 
     try:
-        return response["matches"][0]["metadata"]
+        response = response["matches"][0]["metadata"]
+        logger.info(f"Vector Data query successful!")
+        return response
     except Exception as e:
         print("Response error:", response)
         logger.error("Error while querying data in vector database.", e)
-        return "Sorry! I could not process your request. Please try again later."
+        return "No Data available of user."
 
 # ------------

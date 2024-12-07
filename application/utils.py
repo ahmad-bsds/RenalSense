@@ -1,9 +1,12 @@
 import requests
 import logging
+from project_utils import get_logger
 
-DATA_URL = "http://127.0.0.1:8000/data"
-INFERENCE_URL = "http://127.0.0.1:8000/inference/{user_id}"
-UPDATE_URL = "http://127.0.0.1:8000/health_updates/{user_id}"
+logger = get_logger(__name__)
+
+DATA_URL = "https://renalsense.onrender.com/Data"
+INFERENCE_URL = "https://renalsense.onrender.com/inference/{user_id}"
+UPDATE_URL = "https://renalsense.onrender.com/health_updates/{user_id}"
 # Set the headers including the API key
 HEADERS = {
     "Content-Type": "application/json",
@@ -11,12 +14,14 @@ HEADERS = {
 }
 
 
-def data_send(user_id: str, data: str):
+def data_send(user_id: str, data: dict):
     # Define the Data to be sent
     data_item = {
         "id": user_id,
-        "Data": data
+        "data": data
     }
+
+    print(data_item)
 
     # Send the POST request
     response = requests.post(DATA_URL, json=data_item, headers=HEADERS)
@@ -31,6 +36,7 @@ def data_send(user_id: str, data: str):
         print("Response:", response.text)
 
 
+
 def inference(user_id: str, prompt: str):
     # Construct the full URL with the user_id
     full_url = INFERENCE_URL.format(user_id=user_id)
@@ -41,7 +47,11 @@ def inference(user_id: str, prompt: str):
     }
 
     # Send the GET request
-    response = requests.get(full_url, headers=HEADERS, params=params)
+    try:
+        response = requests.get(full_url, headers=HEADERS, params=params)
+        logger.info("Inference retrieved successfully! Ready to dispacth to front end.")
+    except Exception as e:
+        raise logger.error("Inference failed!", e)
 
     # Check the response
     if response.status_code == 200:
@@ -51,6 +61,7 @@ def inference(user_id: str, prompt: str):
         print("Failed to retrieve inference.")
         print("Status code:", response.status_code)
         print("Response:", response.text)
+
 
 
 def update(user_id: str):

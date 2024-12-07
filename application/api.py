@@ -24,14 +24,22 @@ async def get_api_key(api_key_headers: str = Security(api_key_header)):
 
 class DataItem(BaseModel):
     id: str
-    data: str
+    data: dict
+
+
+@fast_app.get("/")
+async def store_data():
+    return {"message": "Welcome!"}
 
 
 # API for handling users and their Data.
 @fast_app.post("/Data")
 async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
     logger.info(f"User {item.id} is getting in........")
-    add_data_or_usr(user_id=item.id, data=item.data) # id is user id and data is json file.
+    try:
+        add_data_or_usr(user_id=item.id, data=item.data) # id is user id and data is json file.
+    except Exception as e:
+        raise logger.error("Data sending failed!", e)
     return "Data sent successful!"
 
 

@@ -41,10 +41,12 @@ inference_prompt_template = ChatPromptTemplate.from_template(template_string)
 
 def inference(similarity_data, user_prompt):
     """This function will be used for inference purposes."""
-    message = inference_prompt_template.format_messages(
+    try:
+        message = inference_prompt_template.format_messages(
         data=similarity_data,
-        prompt=user_prompt
-    )
+        prompt=user_prompt )
+    except Exception as e:
+        raise logger.error("Error in inference! check inference in bt.py.!", e)
 
     response = chat(message)
     logger.info("Response created for inference.")
@@ -72,7 +74,7 @@ def health_updates(user_id):
     """This function will produce the condition of kidney health and related recommendations."""
     prompt = "My health Data"
 
-    def similarity_data_() -> json:
+    def similarity_data_() :
         """Function to retrieve relevant health Data."""
         logger.info("""Retrieving Data from pinecone...""")
         srh_r = query_collection(user_id=user_id, prompt=prompt)
