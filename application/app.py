@@ -192,8 +192,6 @@ def submit():
         "Extracted Texts": []
     }
 
-    print("User Response...........................", response)
-
     # Save uploaded files and extract text
     extracted_texts = []
     for file in files:
@@ -219,11 +217,13 @@ def submit():
         logger.error(f"TypeError, adding data: {e}")
 
     # Add submitted Data.
-    data_send(user_id=str(current_user.id), data=data)
+    try:
+        data_send(user_id=str(current_user.id), data=data)
+        logger.info(f"Data added by {current_user.id}")
+    except Exception as e:
+        logger.error(f"Error adding data: {e}")
 
-    # Redirect to a success page or perform other actions
 
-    logger.info(f"Data added by {current_user.id}")
     # Redirect to a success page or perform other actions
     return redirect("user_home")
 
