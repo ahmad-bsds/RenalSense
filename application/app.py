@@ -55,13 +55,12 @@ file_flag = None
 def user_home():
     # # Get the Data.
     logger.info(f"User {current_user.id} is getting in........")
-    # try:
-    #     data = update(str(current_user.id))
-    #     logger.info("Data fetched!")
-    # except Exception as e:
-    #     logger.error("Recommendation and updates failed!", e)
-
-    data = {'stage': 0, 'risk': 'Error', 'recommendations': ['Maintain a healthy diet', 'Stay hydrated', 'Exercise regularly', 'Get regular check-ups']}
+    try:
+        data = update(str(current_user.id))
+        logger.info("Data fetched!")
+    except Exception as e:
+        raise logger.error("Recommendation and updates failed!", e)
+    # data = {'stage': 0, 'risk': 'Error', 'recommendations': ['Maintain a healthy diet', 'Stay hydrated', 'Exercise regularly', 'Get regular check-ups']}
     # Check if 'recommendations' is not a list
     if not isinstance(data['recommendations'], list):
         # Convert it to a list
