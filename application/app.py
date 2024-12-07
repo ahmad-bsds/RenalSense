@@ -86,11 +86,13 @@ def refresh():
 # User chat
 @flask_app.route('/chat', methods=['POST', 'GET'])
 @login_required
-async def chat():
+def chat():
     user_message = request.form.get('message')
     print(f"User: {user_message}")
     try:
-        inf = await inference(user_id=str(current_user.id), prompt=user_message)
+        logger.info(f"Generating inference for {current_user.id} ........")
+        inf = inference(user_id=str(current_user.id), prompt=user_message)
+        logger.info("Inference generated!")
     except Exception as e:
         raise logger.error("Chat failed!", e)
     return jsonify({'response': inf})
