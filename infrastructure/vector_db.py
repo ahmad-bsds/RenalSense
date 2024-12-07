@@ -117,10 +117,12 @@ def query_collection(user_id, prompt):
     logger.info(f"Data query successful!")
 
     try:
-        return response["matches"][0]["metadata"]
+        response = response["matches"][0]["metadata"]
+        logger.info(f"Vector Data query successful!")
+        return response
     except Exception as e:
         print("Response error:", response)
         logger.error("Error while querying data in vector database.", e)
-        return "Sorry! I could not process your request. Please try again later."
+        return "No Data available of user."
 
 # ------------
