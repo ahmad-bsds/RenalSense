@@ -46,6 +46,8 @@ def inference(user_id: str, prompt: str):
         "prompt": prompt
     }
 
+    print(requests.get(full_url, headers=HEADERS, params=params))
+
     # Send the GET request
     try:
         response = requests.get(full_url, headers=HEADERS, params=params)
