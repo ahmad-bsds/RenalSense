@@ -84,7 +84,7 @@ def refresh():
     pass
 
 # User chat
-@flask_app.route('/chat', methods=['POST'])
+@flask_app.route('/chat', methods=['POST', 'GET'])
 @login_required
 def chat():
     user_message = request.form.get('message')
@@ -93,7 +93,7 @@ def chat():
     #     inf = inference(user_id=str(current_user.id), prompt=user_message)
     # except Exception as e:
     #     raise logger.error("Chat failed!", e)
-    return jsonify({'response': inference(user_id=str(current_user.id), prompt=user_message)})
+    return jsonify({'response': "Hello"})
 
 
 # when user upload something.

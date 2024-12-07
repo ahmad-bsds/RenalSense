@@ -1,5 +1,8 @@
 import requests
 import logging
+from project_utils import get_logger
+
+logger = get_logger(__name__)
 
 DATA_URL = "http://127.0.0.1:8000/Data"
 INFERENCE_URL = "http://127.0.0.1:8000/inference/{user_id}"
@@ -44,7 +47,11 @@ def inference(user_id: str, prompt: str):
     }
 
     # Send the GET request
-    response = requests.get(full_url, headers=HEADERS, params=params)
+    try:
+        response = requests.get(full_url, headers=HEADERS, params=params)
+        logger.info("Inference retrieved successfully! Ready to dispacth to front end.")
+    except Exception as e:
+        raise logger.error("Inference failed!", e)
 
     # Check the response
     if response.status_code == 200:
