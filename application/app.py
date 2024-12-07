@@ -211,8 +211,14 @@ def submit():
     # Add extracted texts to the response
     response["Extracted Texts"] = extracted_texts
 
+    try:
+        data = {key: str(value) for key, value in response.items()}
+    except Exception as e:
+        data = response
+        logger.error(f"TypeError, adding data: {e}")
+
     # Add submitted Data.
-    data_send(user_id=str(current_user.id), data=json.dumps(response))
+    data_send(user_id=str(current_user.id), data=data)
 
     # Redirect to a success page or perform other actions
 
