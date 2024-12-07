@@ -27,6 +27,11 @@ class DataItem(BaseModel):
     data: str
 
 
+@fast_app.get("/")
+async def store_data():
+    return {"message": "Welcome!"}
+
+
 # API for handling users and their Data.
 @fast_app.post("/Data")
 async def store_data(item: DataItem, api_key: APIKey = Depends(get_api_key)):
