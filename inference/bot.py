@@ -72,7 +72,7 @@ def health_updates(user_id):
     """This function will produce the condition of kidney health and related recommendations."""
     prompt = "My health Data"
 
-    def similarity_data_() -> json:
+    def similarity_data_() :
         """Function to retrieve relevant health Data."""
         logger.info("""Retrieving Data from pinecone...""")
         srh_r = query_collection(user_id=user_id, prompt=prompt)
