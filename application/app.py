@@ -212,7 +212,8 @@ def submit():
     response["Extracted Texts"] = extracted_texts
 
     try:
-        data = {key: str(value) for key, value in response.items()}
+        data = {key: f"{value}" for key, value in response.items()}
+        print("Data submitting...........................", data)
     except Exception as e:
         data = response
         logger.error(f"TypeError, adding data: {e}")
@@ -225,7 +226,6 @@ def submit():
     logger.info(f"Data added by {current_user.id}")
     # Redirect to a success page or perform other actions
     return redirect("user_home")
-
 
 # ========================= User Management ==========================
 # Signup.
