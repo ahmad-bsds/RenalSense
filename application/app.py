@@ -227,7 +227,6 @@ def submit():
     # Redirect to a success page or perform other actions
     return redirect("user_home")
 
-
 # ========================= User Management ==========================
 # Signup.
 @flask_app.route('/signUp', methods=['POST', 'GET'])
