@@ -89,7 +89,11 @@ def refresh():
 def chat():
     user_message = request.form.get('message')
     print(f"User: {user_message}")
-    return jsonify({'response': inference(user_id=str(current_user.id), prompt=user_message)})
+    try:
+        inf = inference(user_id=str(current_user.id), prompt=user_message)
+    except Exception as e:
+        raise logger.error("Chat failed!", e)
+    return jsonify({'response': inf})
 
 
 # when user upload something.
