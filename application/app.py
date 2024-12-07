@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, flash, jsonify, url_for
-import utils
+from .utils import get_logger
 from infrastructure.utils import RegistrationForm, LoginForm
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from infrastructure.utils import hashPass, matchHash
@@ -12,7 +12,7 @@ import PyPDF2
 from application.utils import data_send, update, inference
 
 
-logger = utils.get_logger(__name__)
+logger = get_logger(__name__)
 
 # Flask setup.
 flask_app = Flask(__name__)

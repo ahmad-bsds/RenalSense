@@ -2,7 +2,9 @@ import os
 from together import Together
 from project_utils import load_env_variable
 
-client = Together(api_key=load_env_variable("TOGETHER_API_KEY", "../.env"))
+print(load_env_variable("TOGETHER_API_KEY", "../.env"))
+
+client = Together(api_key=load_env_variable("TOGETHER_API_KEY", "./.env"))
 
 def embed(text):
   response = client.embeddings.create(
