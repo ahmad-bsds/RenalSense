@@ -212,7 +212,7 @@ def submit():
     response["Extracted Texts"] = extracted_texts
 
     try:
-        data = {key: str(value) for key, value in response.items()}
+        data = {key: f"{value}" for key, value in response.items()}
         print("Data submitting...........................", data)
     except Exception as e:
         data = response
