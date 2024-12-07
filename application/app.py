@@ -213,6 +213,7 @@ def submit():
 
     try:
         data = {key: str(value) for key, value in response.items()}
+        print("Data submitting...........................", data)
     except Exception as e:
         data = response
         logger.error(f"TypeError, adding data: {e}")
