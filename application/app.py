@@ -57,6 +57,7 @@ def user_home():
     logger.info(f"User {current_user.id} is getting in........")
     try:
         data = update(str(current_user.id))
+        print("Health data.................",data)
         logger.info("Data fetched!")
     except Exception as e:
         raise logger.error("Recommendation and updates failed!", e)
