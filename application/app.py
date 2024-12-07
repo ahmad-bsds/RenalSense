@@ -236,9 +236,7 @@ def signup():
         if not chk_pass(email):
             hashed = hashPass(password)
             add_data(user_id=user_id, name=name, email=email, password=str(hashed))
-            # Create a user in vector database.
-            data_send(user_id=str(user_id), data="")
-            logger.info(f"user {user_id} added")
+            logger.info(f"user {user_id} signed up.")
             return redirect('/app/settings')
         else:
             flash('Email already exists.')  # To show message.

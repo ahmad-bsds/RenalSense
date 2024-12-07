@@ -18,6 +18,7 @@ def data_send(user_id: str, data: str):
         "Data": data
     }
 
+
     # Send the POST request
     response = requests.post(DATA_URL, json=data_item, headers=HEADERS)
 
