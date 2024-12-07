@@ -22,13 +22,13 @@ def produce_prompt_inference(user_id: str, prompt: str):
     # n = len(srh_r)
     # for i in range(n):
     #     search += (srh_r[i].metadata['document'])
-    try:
-        search = query_collection(user_id=user_id, prompt=prompt)
-    except Exception as e:
-        raise logger.error("Qdrant Data Querying failed!", e)
+    # try:
+    #     search = query_collection(user_id=user_id, prompt=prompt)
+    # except Exception as e:
+    #     raise logger.error("Qdrant Data Querying failed!", e)
 
     # Provide inference.
-    inf = inference(search, prompt)
+    inf = inference("I dont have anything.", prompt)
     return inf
 
 
