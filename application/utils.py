@@ -1,7 +1,8 @@
 import requests
 import logging
 from project_utils import get_logger, load_env_variable
-
+import os
+import shutil
 logger = get_logger(__name__)
 
 DATA_URL = "https://renalsense.onrender.com/Data"
@@ -121,6 +122,18 @@ def send_mail(name, personal_email, message, receiver):
             """
         )
 
+
+def delete_upload_folder(UPLOAD_FOLDER):
+    # Check if the folder exists
+    if os.path.exists(UPLOAD_FOLDER) and os.path.isdir(UPLOAD_FOLDER):
+        try:
+            # Delete the folder and all its contents
+            shutil.rmtree(UPLOAD_FOLDER)
+            print(f"The folder '{UPLOAD_FOLDER}' has been deleted successfully.")
+        except Exception as e:
+            print(f"Error deleting folder '{UPLOAD_FOLDER}': {e}")
+    else:
+        print(f"The folder '{UPLOAD_FOLDER}' does not exist.")
 # print(inference("101664654052127013363854956795422032758", "Hi"))
 # print("------------------------")
 # print(update("101664654052127013363854956795422032758"))
