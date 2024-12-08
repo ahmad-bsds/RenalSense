@@ -66,6 +66,8 @@ def user_home():
     # Validate and process the "Kidney Health" data
     kidney_health = data.get("Kidney Health", {})
 
+    print("Kidney Health.................................", kidney_health)
+
     # Add placeholders for missing keys
     stage = kidney_health.get("Stage", "N/A (Refresh required)")
     risk = kidney_health.get("Risk", "N/A (Refresh required)")
