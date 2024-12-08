@@ -60,27 +60,28 @@ def user_home():
         data = update(str(current_user.id))
         logger.info("Health data fetched successfully!")
     except Exception as e:
-        logger.error("Recommendation and updates failed!", e, exc_info=True)
+        logger.error("Data retrieval failed!", exc_info=True)
         return render_template('error_page.html', message="Failed to load data. Please try again later.")
 
+    # Validate and process the "Kidney Health" data
+    kidney_health = data.get("Kidney Health", {})
+
     # Add placeholders for missing keys
-    if 'stage' not in data:
-        logger.warning("Missing 'stage' in data. Adding placeholder...")
-        data['stage'] = "N/A (Refresh required)"
-    if 'risk' not in data:
-        logger.warning("Missing 'risk' in data. Adding placeholder...")
-        data['risk'] = "N/A (Refresh required)"
-    if 'recommendations' not in data or not isinstance(data['recommendations'], list):
-        logger.warning("Missing or invalid 'recommendations' in data. Adding placeholder...")
-        data['recommendations'] = ["No recommendations available. Please refresh."]
+    stage = kidney_health.get("Stage", "N/A (Refresh required)")
+    risk = kidney_health.get("Risk", "N/A (Refresh required)")
+    recommendations = kidney_health.get("Recommendations", [])
+
+    # Ensure recommendations are a list of dictionaries
+    if not isinstance(recommendations, list) or not all(isinstance(rec, dict) for rec in recommendations):
+        logger.warning("Invalid 'Recommendations' data. Adding placeholder...")
+        recommendations = [{"Recommendation": "No recommendations available. Please refresh.", "Action": "N/A"}]
 
     # Render the user home page
     return render_template(
         'user_home.html',
-        health_stats={'stage': data['stage'], 'risk': data['risk']},
-        recommendations=data['recommendations']
+        health_stats={'stage': stage, 'risk': risk},
+        recommendations=recommendations
     )
-
 
 
 # settings page
