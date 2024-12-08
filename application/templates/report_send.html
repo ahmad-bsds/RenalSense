@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Recommendation Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .custom-shadow {
+            box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="container mx-auto px-4 py-12 max-w-md">
+        <div class="bg-white rounded-2xl overflow-hidden custom-shadow">
+            <div class="bg-gradient-to-r from-cyan-500 to-blue-600 p-6 relative">
+                <div class="absolute top-4 right-4 text-white text-2xl">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-white text-center flex items-center justify-center">
+                    <i class="fas fa-notes-medical mr-3"></i>
+                    Medical Report
+                </h1>
+                <p class="text-center text-white/80 mt-2">Secure & Confidential Communication</p>
+            </div>
+
+            <div class="p-6">
+                <div class="mb-6">
+                    <label for="recommendation" class="block text-gray-700 font-semibold mb-2 flex items-center">
+                        <i class="fas fa-file-medical-alt mr-2 text-cyan-600"></i>
+                        Report
+                    </label>
+                    <textarea
+                        id="recommendation"
+                        rows="4"
+                        class="w-full px-4 py-3 text-gray-700 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-cyan-500 transition duration-300"
+                        placeholder="Enter detailed medical recommendation..."
+                    >{{report}}</textarea>
+                </div>
+
+                <div class="mb-6">
+                    <label for="doctor-email" class="block text-gray-700 font-semibold mb-2 flex items-center">
+                        <i class="fas fa-envelope mr-2 text-cyan-600"></i>
+                        Doctor's Email
+                    </label>
+                    <input
+                        type="email"
+                        id="doctor-email"
+                        class="w-full px-4 py-3 text-gray-700 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-cyan-500 transition duration-300"
+                        placeholder="Enter doctor's email address"
+                    >
+                </div>
+
+
+                <button
+                    id="send-report-btn"
+                    onclick="{{ url_for('submit_report') }}"
+                    class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition duration-300 font-semibold flex items-center justify-center pulse-animation"
+                >
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    Send Report to Doctor
+                </button>
+            </div>
+
+            <div class="bg-gray-100 p-4 text-center">
+                <p class="text-sm text-gray-600 flex items-center justify-center">
+                    <i class="fas fa-lock mr-2 text-green-500"></i>
+                    Your medical information is kept confidential and secure
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('send-report-btn').addEventListener('click', function() {
+            const recommendation = document.getElementById('recommendation').value;
+            const doctorEmail = document.getElementById('doctor-email').value;
+
+            if (!recommendation.trim()) {
+                alert('Please enter a recommendation.');
+                return;
+            }
+
+            if (!doctorEmail.trim() || !doctorEmail.includes('@')) {
+                alert('Please enter a valid doctor\'s email.');
+                return;
+            }
+
+
+
+            // In a real-world scenario, this would send the data to a backend service
+            alert('Report sent successfully to ' + doctorEmail);
+        });
+    </script>
+
+
+<script>
+    document.getElementById('send-report-btn').addEventListener('click', async () => {
+        const recommendation = document.getElementById('recommendation').value;
+        const doctorEmail = document.getElementById('doctor-email').value;
+
+        if (!recommendation.trim()) {
+            alert("Please enter a recommendation before sending.");
+            return;
+        }
+
+        try {
+            const response = await fetch('/app/submit_report', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ report: recommendation, doctor_email: doctorEmail}),
+            });
+
+            if (response.ok) {
+                alert('Report sent successfully!');
+            } else {
+                alert('Failed to send the report. Please try again. Render hosting has some errors with smtplib.');
+            }
+        } catch (error) {
+            console.error('Error sending report:', error);
+            alert('An error occurred. Please try again.');
+        }
+    });
+</script>
+
+
+</body>
+</html>
