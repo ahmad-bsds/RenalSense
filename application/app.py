@@ -15,7 +15,7 @@ from .utils import send_mail
 logger = get_logger(__name__)
 
 # Flask setup.
-flask_app = Flask(__name__)
+flask_app = Flask(__name__, template_folder='./templates', static_folder='./static')
 flask_app.config['SECRET_KEY'] = '$Renal-Sense$'
 idd = uuid.uuid1().int.__str__()  # for generating random ids.
 login_manager = LoginManager()
