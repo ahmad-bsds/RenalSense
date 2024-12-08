@@ -313,6 +313,7 @@ def submit():
 # Signup.
 @flask_app.route('/signUp', methods=['POST', 'GET'])
 def signup():
+    from infrastructure.utils import User
     from infrastructure.mongo_db import add_data, chk_pass
     form = RegistrationForm()
     if request.method == 'POST':
@@ -325,6 +326,11 @@ def signup():
             hashed = hashPass(password)
             add_data(user_id=user_id, name=name, email=email, password=str(hashed))
             logger.info(f"user {user_id} signed up.")
+            # Login user.
+            user = User(user_id, name, email, password)
+            # flask_login method to store session of logging.
+            login_user(user)
+            logger.info(f"user {user_id} logged in, and redirecting to settings page.")
             return redirect('/app/settings')
         else:
             flash('Email already exists.')  # To show message.
