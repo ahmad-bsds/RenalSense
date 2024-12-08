@@ -53,21 +53,36 @@ file_flag = None
 @flask_app.route('/user_home')
 @login_required
 def user_home():
-    # # Get the Data.
-    logger.info(f"User {current_user.id} is getting in........")
+    # Log the user's entry
+    logger.info(f"User {current_user.id} is accessing their home page...")
+
     try:
+        # Fetch updated data for the user
         data = update(str(current_user.id))
-        print("Health data.................",data)
-        logger.info("Data fetched!")
+        logger.info("Health data fetched successfully!")
     except Exception as e:
-        raise logger.error("Recommendation and updates failed!", e)
-    # data = {'stage': 0, 'risk': 'Error', 'recommendations': ['Maintain a healthy diet', 'Stay hydrated', 'Exercise regularly', 'Get regular check-ups']}
-    # Check if 'recommendations' is not a list
-    if not isinstance(data['recommendations'], list):
-        # Convert it to a list
-        data['recommendations'] = [data['recommendations']]
-    return render_template('user_home.html', health_stats= {'stage': data['stage'], 'risk': data['risk']}, recommendations= data['recommendations'])
-   # return render_template('user_home.html', health_stats=health_stats, recommendations=recommendations)
+        logger.error("Recommendation and updates failed!", e, exc_info=True)
+        return render_template('error_page.html', message="Failed to load data. Please try again later.")
+
+    # Add placeholders for missing keys
+    if 'stage' not in data:
+        logger.warning("Missing 'stage' in data. Adding placeholder...")
+        data['stage'] = "N/A (Refresh required)"
+    if 'risk' not in data:
+        logger.warning("Missing 'risk' in data. Adding placeholder...")
+        data['risk'] = "N/A (Refresh required)"
+    if 'recommendations' not in data or not isinstance(data['recommendations'], list):
+        logger.warning("Missing or invalid 'recommendations' in data. Adding placeholder...")
+        data['recommendations'] = ["No recommendations available. Please refresh."]
+
+    # Render the user home page
+    return render_template(
+        'user_home.html',
+        health_stats={'stage': data['stage'], 'risk': data['risk']},
+        recommendations=data['recommendations']
+    )
+
+
 
 # settings page
 @flask_app.route('/settings')
