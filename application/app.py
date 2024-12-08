@@ -8,9 +8,9 @@ import json
 import os
 from werkzeug.utils import secure_filename
 import docx2txt
-import PyPDF2
+from PyPDF2 import PdfReader
 from application.utils import data_send, update, inference
-from .utils import send_mail
+from .utils import send_mail, delete_upload_folder
 
 logger = get_logger(__name__)
 
@@ -198,7 +198,14 @@ def upload():
 # ========================== User settings management =================
 
 # Configuration for file uploads
-UPLOAD_FOLDER = 'uploads'
+# Define the upload folder
+UPLOAD_FOLDER = './static/uploads'
+
+# Check if the directory exists, if not, create it
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+# Acceptable file extensions.
 ALLOWED_EXTENSIONS = {'txt', 'doc', 'docx', 'pdf'}
 
 flask_app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -218,11 +225,11 @@ def extract_text_from_file(file_path):
     elif file_extension == '.docx':
         return docx2txt.process(file_path)
     elif file_extension == '.pdf':
-        pdf_reader = PyPDF2.PdfFileReader(file_path)
+        pdf_reader = PdfReader(file_path)
         text = ''
-        for page_num in range(pdf_reader.numPages):
-            page = pdf_reader.getPage(page_num)
-            text += page.extractText()
+        for page_num in range(len(pdf_reader.pages)):
+            page = pdf_reader.pages[page_num]
+            text += page.extract_text()
         return text
     else:
         return None
@@ -297,6 +304,9 @@ def submit():
     except Exception as e:
         data = response
         logger.error(f"TypeError, adding data: {e}")
+
+
+    delete_upload_folder(UPLOAD_FOLDER=UPLOAD_FOLDER)
 
     # Add submitted Data.
     try:
