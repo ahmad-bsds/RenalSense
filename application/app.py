@@ -63,26 +63,25 @@ def user_home():
         logger.error("Data retrieval failed!", exc_info=True)
         return render_template('error_page.html', message="Failed to load data. Please try again later.")
 
-    # Validate and process the "Kidney Health" data
-    kidney_health = data.get("Kidney Health", {})
+    if 'kidney_health' not in data:
+        data['kidney_health'] = {}
 
-    print("Kidney Health.................................", kidney_health)
+    data = data['kidney_health']
 
-    # Add placeholders for missing keys
-    stage = kidney_health.get("Stage", "N/A (Refresh required)")
-    risk = kidney_health.get("Risk", "N/A (Refresh required)")
-    recommendations = kidney_health.get("Recommendations", [])
+    if 'stage' not in data:
+        data['stage'] = "N/A (Refresh/Data required)"
 
-    # Ensure recommendations are a list of dictionaries
-    if not isinstance(recommendations, list) or not all(isinstance(rec, dict) for rec in recommendations):
-        logger.warning("Invalid 'Recommendations' data. Adding placeholder...")
-        recommendations = [{"Recommendation": "No recommendations available. Please refresh.", "Action": "N/A"}]
+    if 'risk' not in data:
+        data['risk'] = "N/A (Refresh/Data required)"
+
+    if 'recommendations' not in data:
+        data['recommendations'] = ["Hey, Sorry for inconvenience. Data is not available right now. Please try again."]
 
     # Render the user home page
     return render_template(
         'user_home.html',
-        health_stats={'stage': stage, 'risk': risk},
-        recommendations=recommendations
+        health_stats={'stage': data['stage'], 'risk': data['risk']},
+        recommendations=data["recommendations"]
     )
 
 
