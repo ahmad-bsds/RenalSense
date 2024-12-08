@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 import docx2txt
 import PyPDF2
 from application.utils import data_send, update, inference
-
+from .utils import send_mail
 
 logger = get_logger(__name__)
 
@@ -20,25 +20,6 @@ flask_app.config['SECRET_KEY'] = '$Renal-Sense$'
 idd = uuid.uuid1().int.__str__()  # for generating random ids.
 login_manager = LoginManager()
 login_manager.init_app(flask_app)
-
-# ================== User dashboard management ====================
-# Sample Data
-#
-# recommendations = [
-#     {
-#         'stage': 3,
-#         'risk': "High"
-#     },
-#     {'icon': 'fas fa-utensils', 'title': 'Low-sodium diet',
-#      'description': 'Aim for less than 2,000mg of sodium per day'},
-#     {'icon': 'fas fa-glass-water', 'title': 'Stay hydrated', 'description': 'Drink 8-10 glasses of water daily'},
-#     {'icon': 'fas fa-dumbbell', 'title': 'Regular exercise',
-#      'description': '30 minutes of moderate activity, 5 days a week'}
-# ]
-#
-# health_stats = recommendations[0]
-
-
 
 
 # Chatbot response
@@ -63,25 +44,25 @@ def user_home():
         logger.error("Data retrieval failed!", exc_info=True)
         return render_template('error_page.html', message="Failed to load data. Please try again later.")
 
-    if 'kidney_health' not in data:
-        data['kidney_health'] = {}
+    if 'Kidney Health' not in data:
+        data['Kidney Health'] = {}
 
-    data = data['kidney_health']
+    data = data['Kidney Health']
 
-    if 'stage' not in data:
-        data['stage'] = "N/A (Refresh/Data required)"
+    if 'Stage' not in data:
+        data['Stage'] = "N/A (Refresh/Data required)"
 
-    if 'risk' not in data:
-        data['risk'] = "N/A (Refresh/Data required)"
+    if 'Risk' not in data:
+        data['Risk'] = "N/A (Refresh/Data required)"
 
-    if 'recommendations' not in data:
-        data['recommendations'] = ["Hey, Sorry for inconvenience. Data is not available right now. Please try again."]
+    if 'Recommendations' not in data:
+        data['Recommendations'] = ["Hey, Sorry for inconvenience. Data is not available right now. Please try again."]
 
     # Render the user home page
     return render_template(
         'user_home.html',
-        health_stats={'stage': data['stage'], 'risk': data['risk']},
-        recommendations=data["recommendations"]
+        health_stats={'stage': data['Stage'], 'risk': data['Risk']},
+        recommendations=data["Recommendations"]
     )
 
 
@@ -93,11 +74,45 @@ def settings():
 
 
 # On refresh.
-@flask_app.route('/refresh', methods=['POST'])
+@flask_app.route('/refresh', methods=['POST', 'GET'])
 @login_required
 def refresh():
-    # return redirect(url_for('user_home.html'))
-    pass
+    return redirect("user_home")
+
+@flask_app.route('/report_send', methods=['POST', 'GET'])
+@login_required
+def send_report():
+    user_message = """
+    Let's you are a creative report writer for medical purposes and now your task is to\
+    write a report about user to help understand doctor how to treat the user.\
+    and what actions can be performed. \
+    Keep in mind all information should be correct based on the user data.\
+    Do not hallucinate because its medical matter and everything should be correct.\
+    The report should be written in a professional manner.\
+    """
+    try:
+        logger.info(f"Generating report for {current_user.id} ........")
+        report = inference(user_id=str(current_user.id), prompt=user_message)
+        logger.info("Report generated!")
+    except Exception as e:
+        raise logger.error("Chat failed!", e)
+    return render_template('report_send.html', report = report)
+
+@flask_app.route('/submit_report', methods=['POST'])
+def submit_report():
+    data = request.get_json()
+    doctor_email = data.get('doctor_email')
+    try:
+        logger.info(f"Getting report for {current_user.id} ........")
+        report = data.get('report')
+        logger.info("Report sent!")
+        logger.info("Sending mail.....")
+        send_mail(name=current_user.name, message=report, receiver=doctor_email, personal_email=current_user.email)
+        logger.info("Mail sent!")
+    except Exception as e:
+        raise logger.error("Report failed! check app.py", e)
+
+    return redirect("user_home")
 
 # User chat
 @flask_app.route('/chat', methods=['POST', 'GET'])

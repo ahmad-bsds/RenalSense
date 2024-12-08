@@ -78,12 +78,12 @@
             <div class="rounded-lg shadow-lg p-6 card-height overflow-y-auto" style="background-color: #152833;">
                 <div class="flex items-center mb-6" style="color: #66FCF1;">
                     <img src="./pic.jpg" alt="Profile Picture" class="w-16 h-16 rounded-full mr-4">
-                    <h2 class="text-xl font-semibold">Hi! John Doe,<br>How can I help you?</h2>
+                    <h2 class="text-xl font-semibold">Hi!<br>How can I help you?</h2>
                 </div>
                 <div class="flex justify-center space-x-4 mb-6">
                     <button class="bg-blue-500 text-white px-4 py-2 rounded-full" onclick="window.location.href='/app/settings'"><i class="fas fa-cog"></i> Settings</button>
-                    <button id="refresh-btn" class="bg-green-500 text-white px-4 py-2 rounded-full"><i class="fas fa-refresh"></i> Refresh</button>
-                    <button id="report-btn" class="bg-red-500 text-white px-4 py-2 rounded-full"><i class="fas fa-file"></i> Send Report</button>
+                    <button id="refresh-btn" class="bg-green-500 text-white px-4 py-2 rounded-full" onclick="window.location.href='/app/refresh'"><i class="fas fa-refresh"></i> Refresh</button>
+                    <button id="report-btn" class="bg-red-500 text-white px-4 py-2 rounded-full" onclick="window.location.href='/app/report_send'"><i class="fas fa-file"></i> Send Report</button>
                 </div>
                 <div class="mb-6">
                     <h3 class="text-lg font-semibold mb-4" style="color: #66FCF1;">Health Stats</h3>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4" style="color: #66FCF1;">Daily Recommendations</h3>
+                    <h3 class="text-lg font-semibold mb-4" style="color: #66FCF1;">Recommendations</h3>
                     <div class="space-y-4 blog-scroll" style="color: #ffffff;">
                         {% for rec in recommendations %}
                         <div class="flex items-center p-3 rounded-lg" style="background-color: #76ABAE;">

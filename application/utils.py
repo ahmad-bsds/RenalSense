@@ -1,12 +1,15 @@
 import requests
 import logging
-from project_utils import get_logger
+from project_utils import get_logger, load_env_variable
 
 logger = get_logger(__name__)
 
 DATA_URL = "https://renalsense.onrender.com/Data"
 INFERENCE_URL = "https://renalsense.onrender.com/inference/{user_id}"
 UPDATE_URL = "https://renalsense.onrender.com/health_updates/{user_id}"
+PASSWORD = load_env_variable("PASSWORD", "../.env")
+EMAIL = load_env_variable("EMAIL", "../.env")
+
 # Set the headers including the API key
 HEADERS = {
     "Content-Type": "application/json",
@@ -98,6 +101,25 @@ def get_logger(name: str) -> logging.Logger:
     logger = logging.getLogger(name)
 
     return logger
+
+
+def send_mail(name, personal_email, message, receiver):
+    subject = f"Detailed report from RanelSense about {name}, email: {personal_email}"
+    import smtplib
+    # Establishing a connection.
+    with smtplib.SMTP('smtp.gmail.com') as connection:
+        # Security layer.
+        connection.starttls()
+        # Logining to email.
+        connection.login(user=EMAIL, password=PASSWORD)
+        # Sending mail.
+        connection.sendmail(
+            from_addr=EMAIL,  # address from send.
+            to_addrs=receiver,  # address where send.
+            msg=f"""Subject: {subject}\n\n 
+            {message}.
+            """
+        )
 
 # print(inference("101664654052127013363854956795422032758", "Hi"))
 # print("------------------------")
