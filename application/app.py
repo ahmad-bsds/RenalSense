@@ -33,10 +33,6 @@ file_flag = None
 @flask_app.route('/user_home')
 @login_required
 def user_home():
-    stage = None
-    risk = None
-    recommendations = None
-
     # Log the user's entry
     logger.info(f"User {current_user.id} is accessing their home page...")
 
@@ -55,7 +51,7 @@ def user_home():
         elif 'stage' in data:
             stage = data['stage']
         else:
-            stage = "N/A (Refresh/Data required)"
+            stage = "AI/Error"
 
         # -------------------------------
         if 'Risk' in data:
@@ -63,7 +59,7 @@ def user_home():
         elif 'risk' in data:
             risk = data['risk']
         else:
-            risk = "N/A (Refresh/Data required)"
+            risk = "AI/Error"
 
         if 'Recommendations' in data:
             recommendations = data['Recommendations']
@@ -74,14 +70,14 @@ def user_home():
 
 
 
-    if 'kidney_health' in data:
-        data = data['Kidney_Health']
+    elif 'kidney_health' in data:
+        data = data['kidney_health']
         if 'Stage' in data:
             stage = data['Stage']
         elif 'stage' in data:
             stage = data['stage']
         else:
-            stage = "N/A (Refresh/Data required)"
+            stage = "AI/Error"
 
         #-------------------------------
         if 'Risk' in data:
@@ -89,7 +85,7 @@ def user_home():
         elif 'risk' in data:
             risk = data['risk']
         else:
-            risk = "N/A (Refresh/Data required)"
+            risk = "AI/Error"
 
 
         if 'Recommendations' in data:
@@ -99,6 +95,11 @@ def user_home():
         else:
             recommendations = ["Hey, Sorry for inconvenience. Data is not available right now. Please try again."]
 
+
+    else:
+        recommendations = ["Hey, Sorry for inconvenience. AI is making some error. Please try again."]
+        stage = "AI/Error"
+        risk = "AI/Error"
 
 
     # Render the user home page
