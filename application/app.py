@@ -48,7 +48,6 @@ BOT_RESPONSE = "Welcome!"
 uploaded_file = None
 file_flag = None
 
-
 # User dashboard where insights will be shown.
 @flask_app.route('/user_home')
 @login_required
