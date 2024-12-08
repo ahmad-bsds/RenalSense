@@ -91,7 +91,7 @@ def user_home():
         if 'Recommendations' in data:
             recommendations = data['Recommendations']
         elif 'recommendations' in data:
-            recommendations = data['risk']
+            recommendations = data['recommendations']
         else:
             recommendations = ["Hey, Sorry for inconvenience. Data is not available right now. Please try again."]
 
