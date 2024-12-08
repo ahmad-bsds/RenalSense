@@ -88,6 +88,6 @@ win32-setctime
 WTForms
 yarl
 langchain_google_vertexai
-
+langchain_groq
 InstructorEmbedding
 together
