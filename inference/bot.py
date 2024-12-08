@@ -1,35 +1,35 @@
 import json
-import openai
 from langchain.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
 from dotenv import load_dotenv
 import os
-from project_utils import get_logger
+from project_utils import get_logger, load_env_variable
 from infrastructure.vector_db import query_collection
+from langchain_groq import ChatGroq
 
 logger = get_logger(__name__)
 
-# Load the environment variables from the .env file at the specified path
-load_dotenv(dotenv_path='../.env')
 
-# Access the API key
-fa_api_key = os.getenv('FALCON_API_KEY')
-AI71_BASE_URL = "https://api.ai71.ai/v1/"
-AI71_API_KEY = fa_api_key
+def groq_api(model: str = "mixtral-8x7b-32768") -> ChatGroq:
+    """
+    Initializes the GROQ API client.
+    Args:
+        model (str): The model to use for the API.
+    Returns:
+        ChatGroq: An instance of the ChatGroq model.
+    """
+    try:
+        llm = ChatGroq(
+            temperature=0,
+            groq_api_key=load_env_variable("GROQ_API_KEY", env_file_path=load_env_variable("GROQ_API_KEY", env_file_path="../.env")),
+            model_name=model,
+        )
+        return llm
+    except Exception as e:
+        print(f"Error initializing GROQ API: {e}")
+        raise
 
-# All of these APIs are just for representation purpose.
-QDRANT_API_KEY = "Fbo3AybCrGPnWhP2KajA2e0so7_Mz313wleg10ESKFzBB73v5G3JZQ"
-FALCON_API_KEY = "api71-api-95a38584-2219-4703-926a-250532246774"
-os.environ.setdefault("OPENAI_API_KEY", FALCON_API_KEY)
-
-chat = ChatOpenAI(
-    model="tiiuae/falcon-180B-chat",
-    api_key=AI71_API_KEY,
-    base_url=AI71_BASE_URL,
-    streaming=True,
-    temperature=0
-)
+chat = groq_api(model="mixtral-8x7b-32768")
 
 template_string = """Lets you are a kidney doctor and provide me answer of {prompt} from \
 {data}. The answer must be simple, to the point, concise and true.
@@ -52,7 +52,6 @@ def inference(similarity_data, user_prompt):
     logger.info("Response created for inference.")
 
     return response.content
-
 
 
 prompt_template = ChatPromptTemplate.from_template(
