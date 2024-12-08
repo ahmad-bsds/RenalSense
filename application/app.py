@@ -63,10 +63,10 @@ def user_home():
         logger.error("Data retrieval failed!", exc_info=True)
         return render_template('error_page.html', message="Failed to load data. Please try again later.")
 
-    if 'kidney_health' not in data:
-        data['kidney_health'] = {}
+    if 'Kidney Health' not in data:
+        data['Kidney Health'] = {}
 
-    data = data['kidney_health']
+    data = data['Kidney Health']
 
     if 'stage' not in data:
         data['stage'] = "N/A (Refresh/Data required)"
