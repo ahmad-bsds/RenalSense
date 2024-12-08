@@ -33,6 +33,10 @@ file_flag = None
 @flask_app.route('/user_home')
 @login_required
 def user_home():
+    stage = None
+    risk = None
+    recommendations = None
+
     # Log the user's entry
     logger.info(f"User {current_user.id} is accessing their home page...")
 
@@ -44,25 +48,64 @@ def user_home():
         logger.error("Data retrieval failed!", exc_info=True)
         return render_template('error_page.html', message="Failed to load data. Please try again later.")
 
-    if 'Kidney Health' not in data:
-        data['Kidney Health'] = {}
+    if 'Kidney Health' in data:
+        data = data['Kidney Health']
+        if 'Stage' in data:
+            stage = data['Stage']
+        elif 'stage' in data:
+            stage = data['stage']
+        else:
+            stage = "N/A (Refresh/Data required)"
 
-    data = data['Kidney Health']
+        # -------------------------------
+        if 'Risk' in data:
+            risk = data['Risk']
+        elif 'risk' in data:
+            risk = data['risk']
+        else:
+            risk = "N/A (Refresh/Data required)"
 
-    if 'Stage' not in data:
-        data['Stage'] = "N/A (Refresh/Data required)"
+        if 'Recommendations' in data:
+            recommendations = data['Recommendations']
+        elif 'recommendations' in data:
+            recommendations = data['risk']
+        else:
+            recommendations = ["Hey, Sorry for inconvenience. Data is not available right now. Please try again."]
 
-    if 'Risk' not in data:
-        data['Risk'] = "N/A (Refresh/Data required)"
 
-    if 'Recommendations' not in data:
-        data['Recommendations'] = ["Hey, Sorry for inconvenience. Data is not available right now. Please try again."]
+
+    if 'kidney_health' in data:
+        data = data['Kidney_Health']
+        if 'Stage' in data:
+            stage = data['Stage']
+        elif 'stage' in data:
+            stage = data['stage']
+        else:
+            stage = "N/A (Refresh/Data required)"
+
+        #-------------------------------
+        if 'Risk' in data:
+            risk = data['Risk']
+        elif 'risk' in data:
+            risk = data['risk']
+        else:
+            risk = "N/A (Refresh/Data required)"
+
+
+        if 'Recommendations' in data:
+            recommendations = data['Recommendations']
+        elif 'recommendations' in data:
+            recommendations = data['risk']
+        else:
+            recommendations = ["Hey, Sorry for inconvenience. Data is not available right now. Please try again."]
+
+
 
     # Render the user home page
     return render_template(
         'user_home.html',
-        health_stats={'stage': data['Stage'], 'risk': data['Risk']},
-        recommendations=data["Recommendations"]
+        health_stats={'stage': stage, 'risk': risk},
+        recommendations=recommendations
     )
 
 
