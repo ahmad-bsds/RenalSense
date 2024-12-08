@@ -91,4 +91,3 @@ langchain_google_vertexai
 langchain_groq
 InstructorEmbedding
 together
-smtplib
