@@ -68,20 +68,20 @@ def user_home():
 
     data = data['Kidney Health']
 
-    if 'stage' not in data:
-        data['stage'] = "N/A (Refresh/Data required)"
+    if 'Stage' not in data:
+        data['Stage'] = "N/A (Refresh/Data required)"
 
-    if 'risk' not in data:
-        data['risk'] = "N/A (Refresh/Data required)"
+    if 'Risk' not in data:
+        data['Risk'] = "N/A (Refresh/Data required)"
 
-    if 'recommendations' not in data:
-        data['recommendations'] = ["Hey, Sorry for inconvenience. Data is not available right now. Please try again."]
+    if 'Recommendations' not in data:
+        data['Recommendations'] = ["Hey, Sorry for inconvenience. Data is not available right now. Please try again."]
 
     # Render the user home page
     return render_template(
         'user_home.html',
-        health_stats={'stage': data['stage'], 'risk': data['risk']},
-        recommendations=data["recommendations"]
+        health_stats={'stage': data['Stage'], 'risk': data['Risk']},
+        recommendations=data["Recommendations"]
     )
 
 
