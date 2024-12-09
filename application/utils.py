@@ -123,35 +123,37 @@ def send_mail(name, personal_email, message, receiver):
         )
 
 
-import os
-
-UPLOAD_FOLDER = './static/uploads'
-
-def clear_upload_folder(folder_path):
+def extract_text_from_uploaded_file(file):
+    from io import BytesIO
+    import os
+    import docx2txt
+    from PyPDF2 import PdfReader
     """
-    Removes all files inside the specified folder.
-
-    Args:
-        folder_path (str): Path to the folder to clear.
+    Extract text from an uploaded file (Flask's FileStorage object).
+    Supports .txt, .docx, and .pdf files.
     """
-    try:
-        # Ensure the folder exists
-        if not os.path.exists(folder_path):
-            print(f"The folder {folder_path} does not exist.")
-            return
+    filename = file.filename
+    _, file_extension = os.path.splitext(filename)
+    file_extension = file_extension.lower()
 
-        # Iterate over all files in the folder and remove them
-        for filename in os.listdir(folder_path):
-            file_path = os.path.join(folder_path, filename)
-            # Check if it's a file before removing
-            if os.path.isfile(file_path):
-                os.remove(file_path)
-                print(f"Removed file: {file_path}")
-            else:
-                print(f"Skipped: {file_path} is not a file.")
-        print("All files have been removed.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    if file_extension == '.txt':
+        # Read text directly from the file stream
+        file.stream.seek(0)
+        return file.stream.read().decode('utf-8')
+    elif file_extension == '.docx':
+        # Process .docx file from in-memory bytes
+        file.stream.seek(0)
+        return docx2txt.process(BytesIO(file.read()))
+    elif file_extension == '.pdf':
+        # Process .pdf file from the file stream
+        file.stream.seek(0)
+        pdf_reader = PdfReader(file.stream)
+        text = ''
+        for page in pdf_reader.pages:
+            text += page.extract_text()
+        return text
+    else:
+        raise ValueError(f"Unsupported file type: {file_extension}")
 
 
 # print(inference("101664654052127013363854956795422032758", "Hi"))
