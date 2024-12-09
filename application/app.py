@@ -251,7 +251,7 @@ def submit():
     pericardium = request.form.get('pericardium')
     blood_pressure = request.form.get('blood_pressure')
     comment = request.form.get('comment')
-    files = request.files['file-upload']
+    # files = request.files['file-upload']
 
     # Process the Data as needed
     response = {
@@ -277,13 +277,13 @@ def submit():
         "Extracted Texts": []
     }
 
-    # Save uploaded files and extract text
-    extracted_texts = []
-    if files not in (None, []):
-        extracted_texts = extract_text_from_uploaded_file(files)
+    # # Save uploaded files and extract text
+    # extracted_texts = []
+    # if files not in (None, []):
+    #     extracted_texts = extract_text_from_uploaded_file(files)
 
     # Add extracted texts to the response
-    response["Extracted Texts"] = extracted_texts
+    # response["Extracted Texts"] = extracted_texts
 
     try:
         data = {key: f"{value}" for key, value in response.items()}
