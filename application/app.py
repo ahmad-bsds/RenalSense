@@ -8,9 +8,8 @@ import json
 import os
 from werkzeug.utils import secure_filename
 import docx2txt
-from PyPDF2 import PdfReader
 from application.utils import data_send, update, inference
-from .utils import send_mail, clear_upload_folder
+from .utils import send_mail, extract_text_from_uploaded_file
 
 logger = get_logger(__name__)
 
@@ -212,24 +211,24 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def extract_text_from_file(file_path):
-    _, file_extension = os.path.splitext(file_path)
-    file_extension = file_extension.lower()
-
-    if file_extension == '.txt':
-        with open(file_path, 'r', encoding='utf-8') as file:
-            return file.read()
-    elif file_extension == '.docx':
-        return docx2txt.process(file_path)
-    elif file_extension == '.pdf':
-        pdf_reader = PdfReader(file_path)
-        text = ''
-        for page_num in range(len(pdf_reader.pages)):
-            page = pdf_reader.pages[page_num]
-            text += page.extract_text()
-        return text
-    else:
-        return None
+# def extract_text_from_file(file_path):
+#     _, file_extension = os.path.splitext(file_path)
+#     file_extension = file_extension.lower()
+#
+#     if file_extension == '.txt':
+#         with open(file_path, 'r', encoding='utf-8') as file:
+#             return file.read()
+#     elif file_extension == '.docx':
+#         return docx2txt.process(file_path)
+#     elif file_extension == '.pdf':
+#         pdf_reader = PdfReader(file_path)
+#         text = ''
+#         for page_num in range(len(pdf_reader.pages)):
+#             page = pdf_reader.pages[page_num]
+#             text += page.extract_text()
+#         return text
+#     else:
+#         return None
 
 
 @flask_app.route('/submit', methods=['POST'])
@@ -252,14 +251,14 @@ def submit():
     pericardium = request.form.get('pericardium')
     blood_pressure = request.form.get('blood_pressure')
     comment = request.form.get('comment')
-    files = request.files.getlist('file-upload')
+    files = request.files['file-upload']
 
     # Process the Data as needed
     response = {
 
         "Age": age,
         "Gender": gender,
-        "Height": height,
+        "Height Inch": height,
         "Fatigue": fatigue,
         "Concentration": concentration,
         "Sleep": sleep,
@@ -279,18 +278,7 @@ def submit():
     }
 
     # Save uploaded files and extract text
-    extracted_texts = []
-    for file in files:
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file_path = os.path.join(flask_app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
-            logger.info(f"File saved: {filename}")
-
-            # Extract text from the file
-            text = extract_text_from_file(file_path)
-            if text:
-                extracted_texts.append(text)
+    extracted_texts = extract_text_from_uploaded_file(files)
 
     # Add extracted texts to the response
     response["Extracted Texts"] = extracted_texts
@@ -309,8 +297,6 @@ def submit():
         logger.info(f"Data added by {current_user.id}")
     except Exception as e:
         logger.error(f"Error adding data: {e}")
-
-    clear_upload_folder(folder_path=UPLOAD_FOLDER)
 
     # Redirect to a success page or perform other actions
     return redirect("user_home")
