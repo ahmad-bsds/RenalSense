@@ -258,7 +258,7 @@ def submit():
 
         "Age": age,
         "Gender": gender,
-        "Height Inch": height,
+        "Height": str(height) + "Inches",
         "Fatigue": fatigue,
         "Concentration": concentration,
         "Sleep": sleep,
