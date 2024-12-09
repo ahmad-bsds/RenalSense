@@ -123,17 +123,37 @@ def send_mail(name, personal_email, message, receiver):
         )
 
 
-def delete_upload_folder(UPLOAD_FOLDER):
-    # Check if the folder exists
-    if os.path.exists(UPLOAD_FOLDER) and os.path.isdir(UPLOAD_FOLDER):
-        try:
-            # Delete the folder and all its contents
-            shutil.rmtree(UPLOAD_FOLDER)
-            print(f"The folder '{UPLOAD_FOLDER}' has been deleted successfully.")
-        except Exception as e:
-            print(f"Error deleting folder '{UPLOAD_FOLDER}': {e}")
-    else:
-        print(f"The folder '{UPLOAD_FOLDER}' does not exist.")
+import os
+
+UPLOAD_FOLDER = './static/uploads'
+
+def clear_upload_folder(folder_path):
+    """
+    Removes all files inside the specified folder.
+
+    Args:
+        folder_path (str): Path to the folder to clear.
+    """
+    try:
+        # Ensure the folder exists
+        if not os.path.exists(folder_path):
+            print(f"The folder {folder_path} does not exist.")
+            return
+
+        # Iterate over all files in the folder and remove them
+        for filename in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, filename)
+            # Check if it's a file before removing
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+                print(f"Removed file: {file_path}")
+            else:
+                print(f"Skipped: {file_path} is not a file.")
+        print("All files have been removed.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
 # print(inference("101664654052127013363854956795422032758", "Hi"))
 # print("------------------------")
 # print(update("101664654052127013363854956795422032758"))
