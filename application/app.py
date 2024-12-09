@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 import docx2txt
 from PyPDF2 import PdfReader
 from application.utils import data_send, update, inference
-from .utils import send_mail, delete_upload_folder
+from .utils import send_mail, clear_upload_folder
 
 logger = get_logger(__name__)
 
@@ -201,9 +201,6 @@ def upload():
 # Define the upload folder
 UPLOAD_FOLDER = './static/uploads'
 
-# Check if the directory exists, if not, create it
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
 
 # Acceptable file extensions.
 ALLOWED_EXTENSIONS = {'txt', 'doc', 'docx', 'pdf'}
@@ -306,8 +303,6 @@ def submit():
         logger.error(f"TypeError, adding data: {e}")
 
 
-    delete_upload_folder(UPLOAD_FOLDER=UPLOAD_FOLDER)
-
     # Add submitted Data.
     try:
         data_send(user_id=str(current_user.id), data=data)
@@ -315,6 +310,7 @@ def submit():
     except Exception as e:
         logger.error(f"Error adding data: {e}")
 
+    clear_upload_folder(folder_path=UPLOAD_FOLDER)
 
     # Redirect to a success page or perform other actions
     return redirect("user_home")
