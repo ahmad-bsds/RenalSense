@@ -278,7 +278,9 @@ def submit():
     }
 
     # Save uploaded files and extract text
-    extracted_texts = extract_text_from_uploaded_file(files)
+    extracted_texts = []
+    if files not in (None, []):
+        extracted_texts = extract_text_from_uploaded_file(files)
 
     # Add extracted texts to the response
     response["Extracted Texts"] = extracted_texts
