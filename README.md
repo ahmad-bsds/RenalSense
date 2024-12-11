@@ -33,3 +33,6 @@ Add data so that AI can serve you.
 
 After adding data when you'll submit your data, now you'll be redirected to homepage and ready to enjoy the love we served.
 
+# Note:
+Master branch is the branch which is hosted. All other branches are just for version controlling and experiments. API keys are added here, but for your ease will be removed from github or will not be usefull in future.
+
