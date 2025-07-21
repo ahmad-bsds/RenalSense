@@ -1,7 +1,7 @@
 
 # Ranel Sense
 
-**RenalSense** is not just a solution for today—it's dedicated to the people of **Hawaii** and beyond, bringing cutting-edge kidney care to **every corner of humanity**, empowering all to live healthier, longer lives.
+Renal Sense is a personal kidney health companion designed to support individuals with Chronic Kidney Disease (CKD). The platform provides users with personalized health stats, such as CKD stage and risk level, along with tailored daily recommendations including low-sodium diet tips, hydration goals, and exercise guidance. It features an AI assistant for real-time interaction and access to expert health tips from nephrologists, dietitians, and physical therapists. The user-friendly dashboard helps users manage their kidney health more effectively through education, tracking, and professional insights.
 
 
 # Get Start
